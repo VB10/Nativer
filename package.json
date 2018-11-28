@@ -7,9 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "adm-zip": "^0.4.13",
     "native-base": "^2.8.1",
+    "plist": "^3.0.1",
     "react": "16.6.1",
-    "react-native": "0.57.5"
+    "react-native": "0.57.5",
+    "react-native-fbsdk": "^0.8.0",
+    "xcode": "^1.0.0"
   },
   "devDependencies": {
     "@types/react": "^16.7.7",
