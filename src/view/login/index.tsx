@@ -1,20 +1,8 @@
 import React, { Component } from "react";
 
-import {
-  Content,
-  Text,
-  Grid,
-  Row,
-  Container,
-  Header,
-  Form,
-  Item,
-  Input,
-  Label,
-  Button
-} from "native-base";
-import { CustomButton } from "../../components/index";
-import { StyleSheet, View } from "react-native";
+import { Container, Footer, Text } from "native-base";
+import { CustomButton, HRLine } from "../../components/index";
+import { StyleSheet, View, Image } from "react-native";
 import ButtonType from "../../components/button/const";
 
 interface IProps {}
@@ -30,32 +18,23 @@ export default class LoginPage extends Component<IProps, IState> {
     return (
       <Container>
         <View style={styles.content}>
-          <Form>
-            <Item
-              floatingLabel
-              style={{
-                borderStyle: "solid",
-                borderWidth: 1
-              }}
-            >
-              <Label>Username</Label>
-              <Input />
-            </Item>
-
-            <Item floatingLabel>
-              <Label>Password</Label>
-              <Input />
-            </Item>
-
-            <View >
-              <CustomButton type={ButtonType.Facebook} />
-              <CustomButton type={ButtonType.Google} />
-
-              <CustomButton type={ButtonType.Twitter} />
-              
-            </View>
-          </Form>
+          <View style={styles.image}>
+            <Image
+              source={require("../../images/coffe.png")}
+              resizeMode="contain"
+              style={{ flex: 1, width: "100%" }}
+            />
+          </View>
+          <View style={styles.buttonView}>
+            <HRLine text="Sign up using" color="#8c746a" />
+            <CustomButton type={ButtonType.Facebook} />
+            <CustomButton type={ButtonType.Twitter} />
+            <CustomButton type={ButtonType.Google} />
+          </View>
         </View>
+        <Footer style={styles.footer} >
+        <Text style={styles.footerText} > Don’t have an account? </Text>
+        </Footer>
       </Container>
     );
   }
@@ -63,8 +42,12 @@ export default class LoginPage extends Component<IProps, IState> {
 
 const styles = StyleSheet.create({
   content: {
-    flex: 1,
-    justifyContent: "center"
+    flex: 1
+  },
+  image: {
+    alignItems: "center",
+    justifyContent: "flex-start",
+    flex: 1
   },
   button: {
     marginTop: 20,
@@ -90,5 +73,21 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 40,
     borderColor: "#dbdfe2"
+  },
+  buttonView: {
+    marginBottom: 10,
+    justifyContent: "flex-end"
+  },
+  footer: {
+    backgroundColor: "white",
+    borderColor: "white",
+    alignItems: 'center',
+  },
+  footerText: {
+    fontWeight: "normal",
+    fontStyle: "normal",
+    letterSpacing: 0,
+    textAlign: "center",
+    color: "rgba(62, 74, 89, 0.45)"
   }
 });

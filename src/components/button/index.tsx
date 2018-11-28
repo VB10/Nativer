@@ -56,7 +56,7 @@ export class CustomButton extends Component<IProps, IState> {
       <Button block style={[{backgroundColor : backgroundColor}, styles.view]}>
         <Icon name={icon} />
         <View style={styles.textView}>
-          <Text style={styles.text}>Log in with</Text>
+          <Text style={styles.text}>Log in with </Text>
           <Text style={styles.textCompany}>{textCompany}</Text>
         </View>
       </Button>
@@ -73,17 +73,15 @@ export default CustomButton;
 const styles = StyleSheet.create({
   view: {
     height: 50,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: "row",
-    borderRadius: 20,
-    marginRight: 10,
-    marginLeft: 10,
-    marginBottom: 10,
+    borderRadius: 5,
+    margin: 10,
     color: "white",
     marginTop: 5,
     shadowRadius: 10,
-    shadowOpacity: 1
+    shadowOpacity: 0
   },
   text: {
     color: "white",
