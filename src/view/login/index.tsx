@@ -4,7 +4,8 @@ import { Container, Footer, Text, Button } from "native-base";
 import { CustomButton, HRLine } from "../../components/index";
 import { StyleSheet, View, Image } from "react-native";
 import ButtonType from "../../components/button/const";
-import { LoginManager } from "react-native-fbsdk";
+import { LoginManager, AccessToken } from "react-native-fbsdk";
+import {styles} from './styles'
 
 interface IProps {}
 interface IState {}
@@ -14,6 +15,15 @@ export default class LoginPage extends Component<IProps, IState> {
 
     this.state = {};
   }
+  componentWillMount = () => {
+    LoginManager.setLoginBehavior("native");
+
+    //auto user check
+    AccessToken.getCurrentAccessToken().then((key: any) => {
+      console.log(key);
+      //key is empty login expired
+    });
+  };
 
   facebookLogin() {
     LoginManager.logInWithReadPermissions(["public_profile"])
@@ -25,6 +35,10 @@ export default class LoginPage extends Component<IProps, IState> {
             "Login was successful with permissions: " +
               result.grantedPermissions.toString()
           );
+          //TODO user id save data
+          AccessToken.getCurrentAccessToken().then((data: any) => {
+            console.log(data.accessToken.toString(), "aaa");
+          });
         }
       })
       .catch((error: any) => {
@@ -49,8 +63,18 @@ export default class LoginPage extends Component<IProps, IState> {
               type={ButtonType.Facebook}
               onPress={this.facebookLogin}
             />
-            <CustomButton type={ButtonType.Twitter} onPress={() => {}} />
-            <CustomButton type={ButtonType.Google} onPress={() => {}} />
+            <CustomButton
+              type={ButtonType.Twitter}
+              onPress={() => {
+                alert("It's comming soon");
+              }}
+            />
+            <CustomButton
+              type={ButtonType.Google}
+              onPress={() => {
+                alert("It's comming soon");
+              }}
+            />
           </View>
         </View>
         <Footer style={styles.footer}>
@@ -61,54 +85,3 @@ export default class LoginPage extends Component<IProps, IState> {
   }
 }
 
-const styles = StyleSheet.create({
-  content: {
-    flex: 1
-  },
-  image: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1
-  },
-  button: {
-    marginTop: 20,
-    marginRight: 10,
-    marginLeft: 10,
-    shadowRadius: 10,
-    shadowOpacity: 1,
-    borderRadius: 10,
-    backgroundColor: "rgb(232,121,117)"
-  },
-  label: {
-    fontSize: 17.5,
-    fontWeight: "600",
-    fontStyle: "normal",
-    lineHeight: 24,
-    letterSpacing: 0,
-    textAlign: "center",
-    color: "#ffffff"
-  },
-  input: {
-    backgroundColor: "#ffffff",
-    borderStyle: "solid",
-    borderWidth: 1,
-    height: 40,
-    borderColor: "#dbdfe2"
-  },
-  buttonView: {
-    marginBottom: 10,
-    justifyContent: "flex-end"
-  },
-  footer: {
-    backgroundColor: "white",
-    borderColor: "white",
-    alignItems: "center"
-  },
-  footerText: {
-    fontWeight: "normal",
-    fontStyle: "normal",
-    letterSpacing: 0,
-    textAlign: "center",
-    color: "rgba(62, 74, 89, 0.45)"
-  }
-});
