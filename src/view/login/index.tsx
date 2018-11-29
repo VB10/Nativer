@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 
-import { Container, Footer, Text } from "native-base";
+import { Container, Footer, Text, Button } from "native-base";
 import { CustomButton, HRLine } from "../../components/index";
 import { StyleSheet, View, Image } from "react-native";
 import ButtonType from "../../components/button/const";
+import { LoginManager } from "react-native-fbsdk";
 
 interface IProps {}
 interface IState {}
@@ -14,6 +15,23 @@ export default class LoginPage extends Component<IProps, IState> {
     this.state = {};
   }
 
+  facebookLogin() {
+    LoginManager.logInWithReadPermissions(["public_profile"])
+      .then((result: any) => {
+        if (result.isCancelled) {
+          alert("Login was cancelled");
+        } else {
+          alert(
+            "Login was successful with permissions: " +
+              result.grantedPermissions.toString()
+          );
+        }
+      })
+      .catch((error: any) => {
+        alert("Login failed with error: " + error);
+      });
+  }
+
   render() {
     return (
       <Container>
@@ -22,18 +40,21 @@ export default class LoginPage extends Component<IProps, IState> {
             <Image
               source={require("../../images/coffe.png")}
               resizeMode="contain"
-              style={{ flex: 1, width: "100%" }}
+              style={{ width: "100%" }}
             />
           </View>
           <View style={styles.buttonView}>
             <HRLine text="Sign up using" color="#8c746a" />
-            <CustomButton type={ButtonType.Facebook} />
-            <CustomButton type={ButtonType.Twitter} />
-            <CustomButton type={ButtonType.Google} />
+            <CustomButton
+              type={ButtonType.Facebook}
+              onPress={this.facebookLogin}
+            />
+            <CustomButton type={ButtonType.Twitter} onPress={() => {}} />
+            <CustomButton type={ButtonType.Google} onPress={() => {}} />
           </View>
         </View>
-        <Footer style={styles.footer} >
-        <Text style={styles.footerText} > Don’t have an account? </Text>
+        <Footer style={styles.footer}>
+          <Text style={styles.footerText}> Don’t have an account? </Text>
         </Footer>
       </Container>
     );
@@ -46,7 +67,7 @@ const styles = StyleSheet.create({
   },
   image: {
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     flex: 1
   },
   button: {
@@ -81,7 +102,7 @@ const styles = StyleSheet.create({
   footer: {
     backgroundColor: "white",
     borderColor: "white",
-    alignItems: 'center',
+    alignItems: "center"
   },
   footerText: {
     fontWeight: "normal",

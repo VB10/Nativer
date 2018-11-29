@@ -4,6 +4,7 @@ import { Icon, Button } from "native-base";
 import ButtonType from "./const";
 interface IProps {
   type: ButtonType;
+  onPress : () => void
 }
 interface IState {
   backgroundColor: string;
@@ -53,7 +54,7 @@ export class CustomButton extends Component<IProps, IState> {
   returnCustomButton() {
     const { backgroundColor, textCompany , icon } = this.state;
     return (
-      <Button block style={[{backgroundColor : backgroundColor}, styles.view]}>
+      <Button block style={[{backgroundColor : backgroundColor}, styles.view]} onPress={this.props.onPress}>
         <Icon name={icon} />
         <View style={styles.textView}>
           <Text style={styles.text}>Log in with </Text>
