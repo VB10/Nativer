@@ -13,6 +13,7 @@
     "react": "16.6.1",
     "react-native": "0.57.5",
     "react-native-fbsdk": "^0.8.0",
+    "react-native-router-flux": "^4.0.6",
     "xcode": "^1.0.0"
   },
   "devDependencies": {
