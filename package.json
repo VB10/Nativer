@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "adm-zip": "^0.4.13",
+    "lottie-react-native": "^2.5.10",
     "native-base": "^2.8.1",
     "plist": "^3.0.1",
     "react": "16.6.1",
