@@ -2,28 +2,32 @@ import React, { Component } from "react";
 
 import { Container, Footer, Text, Button } from "native-base";
 import { CustomButton, HRLine } from "../../components/index";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, AsyncStorage } from "react-native";
 import ButtonType from "../../components/button/const";
 import { LoginManager, AccessToken } from "react-native-fbsdk";
 import { styles } from "./styles";
 import LottieViev from "lottie-react-native";
+import {UserID,UserToken} from '../const'
 
 interface IProps {}
 interface IState {}
 export default class LoginPage extends Component<IProps, IState> {
-  public loginAnimation: LottieViev | null = null;
+  public loginAnimation: LottieViev;
 
   constructor(props: IProps) {
     super(props);
-
+    
     this.state = {};
   }
   componentWillMount = () => {
     //auto user check
-    AccessToken.getCurrentAccessToken().then((key: any) => {
-      console.log(key);
-      //key is empty login expired
-    });
+    // AsyncStorage.getItem(UserID).then((value) => {
+    //   console.log(value)
+    // })
+    // AccessToken.getCurrentAccessToken().then((key: any) => {
+    //   console.log(key);
+    //   //key is empty login expired
+    // });
   };
 
   facebookLogin() {
@@ -37,7 +41,10 @@ export default class LoginPage extends Component<IProps, IState> {
               result.grantedPermissions.toString()
           );
           //TODO user id save data
-          AccessToken.getCurrentAccessToken().then((data: any) => {
+          AccessToken.getCurrentAccessToken().then((data: AccessToken) => {
+
+
+            AsyncStorage.setItem(UserID,data.userID.toString())
             console.log(data.accessToken.toString(), "aaa");
           });
         }
@@ -68,7 +75,7 @@ export default class LoginPage extends Component<IProps, IState> {
             /> */}
           </View>
           <View style={styles.buttonView}>
-            <HRLine text="Sign up using" color="#8c746a" />
+            <HRLine text="Sign up using" color="gray" />
             <CustomButton
               type={ButtonType.Facebook}
               onPress={this.facebookLogin}
