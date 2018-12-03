@@ -2,27 +2,32 @@ import React, { Component } from "react";
 
 import { Container, Footer, Text, Button } from "native-base";
 import { CustomButton, HRLine } from "../../components/index";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, AsyncStorage } from "react-native";
 import ButtonType from "../../components/button/const";
 import { LoginManager, AccessToken } from "react-native-fbsdk";
-import {styles} from './styles'
+import { styles } from "./styles";
+import LottieViev from "lottie-react-native";
+import {UserID,UserToken} from '../const'
 
 interface IProps {}
 interface IState {}
 export default class LoginPage extends Component<IProps, IState> {
+  public loginAnimation: LottieViev;
+
   constructor(props: IProps) {
     super(props);
-
+    
     this.state = {};
   }
   componentWillMount = () => {
-    LoginManager.setLoginBehavior("native");
-
     //auto user check
-    AccessToken.getCurrentAccessToken().then((key: any) => {
-      console.log(key);
-      //key is empty login expired
-    });
+    // AsyncStorage.getItem(UserID).then((value) => {
+    //   console.log(value)
+    // })
+    // AccessToken.getCurrentAccessToken().then((key: any) => {
+    //   console.log(key);
+    //   //key is empty login expired
+    // });
   };
 
   facebookLogin() {
@@ -36,7 +41,10 @@ export default class LoginPage extends Component<IProps, IState> {
               result.grantedPermissions.toString()
           );
           //TODO user id save data
-          AccessToken.getCurrentAccessToken().then((data: any) => {
+          AccessToken.getCurrentAccessToken().then((data: AccessToken) => {
+
+
+            AsyncStorage.setItem(UserID,data.userID.toString())
             console.log(data.accessToken.toString(), "aaa");
           });
         }
@@ -51,14 +59,23 @@ export default class LoginPage extends Component<IProps, IState> {
       <Container>
         <View style={styles.content}>
           <View style={styles.image}>
-            <Image
+            <LottieViev
+              source={require("../../images/happy.json")}
+              autoPlay
+              loop
+              autoSize
+              ref={(animation: LottieViev) => {
+                this.loginAnimation = animation;
+              }}
+            />
+            {/* <Image
               source={require("../../images/coffe.png")}
               resizeMode="contain"
               style={{ width: "100%" }}
-            />
+            /> */}
           </View>
           <View style={styles.buttonView}>
-            <HRLine text="Sign up using" color="#8c746a" />
+            <HRLine text="Sign up using" color="gray" />
             <CustomButton
               type={ButtonType.Facebook}
               onPress={this.facebookLogin}
@@ -72,7 +89,8 @@ export default class LoginPage extends Component<IProps, IState> {
             <CustomButton
               type={ButtonType.Google}
               onPress={() => {
-                alert("It's comming soon");
+                this.loginAnimation.reset();
+                // alert("It's comming soon");
               }}
             />
           </View>
@@ -84,4 +102,3 @@ export default class LoginPage extends Component<IProps, IState> {
     );
   }
 }
-
