@@ -2,10 +2,15 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
 export class SchoolsPage extends Component {
+
+  componentWillMount = () => {
+    console.log(this.props)
+  };
+  
   render() {
     return (
       <View>
-        <Text> textInComponent </Text>
+        <Text> Loading... </Text>
       </View>
     )
   }
