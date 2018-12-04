@@ -6,16 +6,17 @@ import TabMain from "./src/view/home";
 import { login, control, tab, tabSchool } from "./src/util";
 import SchoolsPage from "./src/view/tab/school";
 import CustomTabBar from "./src/components/tabbar";
+import SettingsPage from "./src/view/tab/settings";
 
 const App = () => (
   <Router>
     <Stack key="root">
       <Scene key={login} hideNavBar component={LoginPage} />
       <Scene key={control} hideNavBar component={AppControl}  initial />
-      <Scene key={tab} tabs tabBarComponent={CustomTabBar}  title="Schools">
-        <Scene component={SchoolsPage}  hideNavBar/>
+      <Scene key={tab} tabs tabBarComponent={CustomTabBar} hideNavBar >
+        <Scene key="tab1" component={SchoolsPage}   title="Schools"/>
         <Scene  component={SchoolsPage} hideNavBar/>
-        <Scene  component={SchoolsPage} hideNavBar/>
+        <Scene  key="tab2"  component={SettingsPage} title="Settings"/>
     
       </Scene>
     </Stack>

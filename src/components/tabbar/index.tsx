@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Text, View, Image, PixelRatio } from "react-native";
 import { Tab, Footer, FooterTab, Button, Icon, Thumbnail } from "native-base";
 import { styles } from "./styles";
+import { Actions } from "react-native-router-flux";
 interface IProps {
   text: string;
   color: string;
@@ -66,6 +67,15 @@ export class CustomTabBar extends Component<IProps, IState> {
     const { current, currentTab1, currentTab2 } = this.state;
     if (current === tab) return;
 
+    switch (tab) {
+      case CurrentTab.tab2:
+        Actions.tab2();
+        break;
+      default:
+        Actions.pop()
+        break;
+    }
+    
     //if press current tab return but other tab change color
     this.setState({
       current: tab,
