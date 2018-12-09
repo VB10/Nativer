@@ -6,11 +6,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
     bottom: 20,
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center"
   },
   icon: {
-    fontSize: 15 * PixelRatio.get(),
+    fontSize: 10 * PixelRatio.get(),
     color: "white"
   },
   footer: {

@@ -45,7 +45,7 @@ export class CustomTabBar extends Component<IProps, IState> {
   buttonCenter = () => {
     return (
       <Button rounded block style={styles.buttonCenter}>
-        <Icon name="feather" type="Feather" style={styles.icon} />
+        <Icon name="layers" type="Feather" style={styles.icon} />
       </Button>
     );
   };
