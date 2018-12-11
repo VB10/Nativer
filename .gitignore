@@ -22,6 +22,7 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
+
 # Android/IntelliJ
 #
 build/
@@ -54,3 +55,9 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+# ios
+Pods/
+
+#infoplist
+ios/GoogleService-Info.plist
