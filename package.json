@@ -12,10 +12,11 @@
     "native-base": "^2.8.1",
     "plist": "^3.0.1",
     "react": "^16.7.0-alpha.0",
-    "react-test-renderer": "^16.7.0-alpha.2",
     "react-native": "0.57.5",
     "react-native-fbsdk": "^0.8.0",
     "react-native-router-flux": "^4.0.6",
+    "react-native-svg": "^8.0.8",
+    "react-test-renderer": "^16.7.0-alpha.2",
     "xcode": "^1.0.0"
   },
   "devDependencies": {
