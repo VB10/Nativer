@@ -23,12 +23,19 @@ You can also:
 > ui testing and unit testing add all components
 
 
+
 ### Installation
 ```sh
 $ cd Nativer
 $ npm install --save 
 $ react-native run-ios OR react-native run-android
+
+$ cd ios
+$ pod update
+$ pod install
 ```
+### Danger
+> add firebase your .plist file
 
 
 
