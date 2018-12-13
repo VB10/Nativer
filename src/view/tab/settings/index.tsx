@@ -1,32 +1,20 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
-import {
-  Svg,
-  Circle,
-  Rect,
-  Polygon,
-  Polyline,
-  Defs,
-  RadialGradient,
-  Stop,
-  ClipPath,
-  G,
-  Ellipse
-} from "react-native-svg";
+import { Svg, Rect, Polygon } from "react-native-svg";
+import { connect } from "react-redux";
 
-export class SettingsPage extends Component {
+ class SettingsPage extends Component {
   render() {
     return (
-      <View style={{flex : 1,alignItems:'center'}}>
+      <View style={{ flex: 1, alignItems: "center" }}>
         <Svg height="200" width="200">
-          
           <Polygon
             points="200,100 0,100 100,00"
             fill="lime"
             stroke="purple"
             strokeWidth="1"
             onResponderMove={() => {
-              alert("ok")
+              alert("ok");
             }}
           />
           <Rect
@@ -40,7 +28,7 @@ export class SettingsPage extends Component {
           />
         </Svg>
 
-        <Svg
+        {/* <Svg
     height="200"
     width="300"
 >
@@ -78,10 +66,25 @@ export class SettingsPage extends Component {
             stroke="rgb(0,0,0)"
           />
         </Svg>
-        
+         */}
       </View>
     );
   }
 }
+//fix any
+const mapStateToProps = (state: any) => {
+  console.log(state,"aaaaa")
+  return {
 
-export default SettingsPage;
+  }
+}
+
+const mapDispatchToProps = {
+  
+}
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SettingsPage);
