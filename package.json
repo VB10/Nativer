@@ -14,9 +14,12 @@
     "react": "^16.7.0-alpha.0",
     "react-native": "0.57.5",
     "react-native-fbsdk": "^0.8.0",
+    "react-native-firebase": "^5.1.1",
     "react-native-router-flux": "^4.0.6",
     "react-native-svg": "^8.0.8",
+    "react-redux": "^6.0.0",
     "react-test-renderer": "^16.7.0-alpha.2",
+    "redux": "^4.0.1",
     "xcode": "^1.0.0"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-package com.nativer;
+package com.hwa.a.nativerx;
 
 import com.facebook.react.ReactActivity;
 import android.content.Intent;

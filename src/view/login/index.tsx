@@ -30,6 +30,15 @@ export default class LoginPage extends Component<IProps, IState> {
     // });
   };
 
+  checkUser() {
+      AsyncStorage.getItem(UserID).then((value) => {
+      console.log(value)
+    })
+    AccessToken.getCurrentAccessToken().then((key: any) => {
+      console.log(key);
+      //key is empty login expired
+    });
+  }
   facebookLogin() {
     LoginManager.logInWithReadPermissions(["public_profile"])
       .then((result: any) => {
@@ -44,8 +53,9 @@ export default class LoginPage extends Component<IProps, IState> {
           AccessToken.getCurrentAccessToken().then((data: AccessToken) => {
 
 
-            AsyncStorage.setItem(UserID,data.userID.toString())
-            console.log(data.accessToken.toString(), "aaa");
+            AsyncStorage.setItem(UserID, data.userID.toString())
+            this.checkUser();
+            // console.log(data.accessToken.toString(), "aaa");
           });
         }
       })

@@ -3,7 +3,7 @@ import { Text, View, AsyncStorage, StyleSheet } from "react-native";
 import { UserID } from "../const";
 import LottieViev from "lottie-react-native";
 import { Actions } from "react-native-router-flux";
-import { tab } from "../../util";
+import { tab, login } from "../../util";
 interface IProps {}
 interface IState {}
 export class AppControl extends Component<IProps, IState> {
@@ -20,14 +20,7 @@ export class AppControl extends Component<IProps, IState> {
       if (value) {
         Actions.reset(tab);
       } else {
-        return (
-          <LottieViev
-            source={require("../../images/happy.json")}
-            autoPlay
-            loop
-            autoSize
-          />
-        );
+          Actions.reset(login)
       }
     });
   }
