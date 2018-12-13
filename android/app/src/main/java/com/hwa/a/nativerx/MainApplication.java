@@ -1,4 +1,4 @@
-package com.nativer;
+package com.hwa.a.nativerx;
 
 import android.app.Application;
 

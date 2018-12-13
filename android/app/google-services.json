@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "873034497161",
+    "firebase_url": "https://testproject-d9372.firebaseio.com",
+    "project_id": "testproject-d9372",
+    "storage_bucket": "testproject-d9372.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873034497161:android:807b77d5b9e3faf2",
+        "android_client_info": {
+          "package_name": "com.hwa.a.nativerx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873034497161-k3pu3f2qm17ni8bsm0dsrsiha909tr59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtRoWkHbyrmA3_wNt1lUy6kHAvOOFymN4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
