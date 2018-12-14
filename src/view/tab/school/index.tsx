@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import { Text, View, FlatList, Image, ImageBackground } from "react-native";
 import { Card, CardItem, Grid, Col, Icon } from "native-base";
 import { styles } from "../../login/styles";
-import Svg, { Polygon, Rect, Path } from "react-native-svg";
-//TODO : check internet connection
-//TODO : add crash manager
-//TODO : add firebase
-//TODO : add design scholl
 
 export class SchoolsPage extends Component {
   componentWillMount = () => {
@@ -37,24 +32,37 @@ export class SchoolsPage extends Component {
             }}
           />
           <ImageBackground
-            style={{ flex: 1, }}
+            style={{ flex: 1 }}
             source={require("../../../images/school_d.jpg")}
           >
-            <View style={{flex : 1,justifyContent:"flex-start",alignItems:"flex-end",bottom:10}}>
-            <Text style={{backgroundColor:"#fed000",color:"rgba(48,56,65,0.7)",padding:10}}>Pendik</Text>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "flex-start",
+                alignItems: "flex-end",
+                bottom: 10
+              }}
+            >
+              <Text
+                style={{
+                  backgroundColor: "#fed000",
+                  color: "rgba(48,56,65,0.7)",
+                  padding: 10
+                }}
+              >
+                Pendik
+              </Text>
             </View>
             <View
               style={{
-                
                 backgroundColor: "rgba(0,0,0,0.4)",
                 flex: 0.25,
                 alignItems: "center",
                 paddingLeft: 5,
-                flexDirection: "row",
-                
+                flexDirection: "row"
               }}
             >
-              <Text  style={{ color: "white", fontWeight: "500" }}>{val}</Text>
+              <Text style={{ color: "white", fontWeight: "500" }}>{val}</Text>
               {this.renderStudentCount(50)}
             </View>
             <View />
@@ -73,13 +81,20 @@ export class SchoolsPage extends Component {
           flexDirection: "row",
           alignItems: "center",
           flex: 1,
-          marginRight:5,
+          marginRight: 5,
           justifyContent: "flex-end"
         }}
       >
-        <Icon name="users" type="Feather" style={{ color: "rgba(255,255,255,0.7)" ,fontSize: 20,marginRight: 2,}} />
-        <Text style={{ color: "rgba(255,255,255,0.7)", }}>{val}+</Text>
-
+        <Icon
+          name="users"
+          type="Feather"
+          style={{
+            color: "rgba(255,255,255,0.7)",
+            fontSize: 20,
+            marginRight: 2
+          }}
+        />
+        <Text style={{ color: "rgba(255,255,255,0.7)" }}>{val}+</Text>
       </View>
     );
   }
@@ -94,8 +109,9 @@ export class SchoolsPage extends Component {
     return (
       <View style={{ flex: 1 }}>
         <FlatList
-          style={{ paddingTop:15 }}
+          style={{ paddingTop: 15 }}
           data={items}
+          keyExtractor={item=> item.length.toString()}
           renderItem={({ item }) => this.renderItem(item)}
         />
       </View>

@@ -1,88 +1,33 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
-import { Svg, Rect, Polygon } from "react-native-svg";
+import { Text, View, ScrollView } from "react-native";
 import { connect } from "react-redux";
+import ProfileCard from "../../../components/card/profile";
+import { Button, Icon } from "native-base";
 
- class SettingsPage extends Component {
+class SettingsPage extends Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center" }}>
-        <Svg height="200" width="200">
-          <Polygon
-            points="200,100 0,100 100,00"
-            fill="lime"
-            stroke="purple"
-            strokeWidth="1"
-            onResponderMove={() => {
-              alert("ok");
-            }}
-          />
-          <Rect
-            x="00"
-            y="100"
-            width="200"
-            height="100"
-            fill="rgb(0,0,255)"
-            strokeWidth="0.5"
-            stroke="rgb(0,0,0)"
-          />
-        </Svg>
+      <View style={{ flex: 0.9 }}>
+        <View style={{ flex: 0.3 }}>
+          <ProfileCard />
+        </View>
+        <ScrollView style={{ flex: 1 }} />
 
-        {/* <Svg
-    height="200"
-    width="300"
->
-    <Defs>
-        <RadialGradient id="grad" cx="100" cy="50" rx="85" ry="55" fx="100" fy="75" gradientUnits="userSpaceOnUse">
-            <Stop
-                offset="0"
-                stopColor="#ff0"
-                stopOpacity="1"
-            />
-            <Stop
-                offset="1"
-                stopColor="#83a"
-                stopOpacity="1"
-            />
-        </RadialGradient>
-          </Defs>
-          
-          <Polygon
-            points="200,100 0,100 100,00"
-            fill="url(#grad)"
-            stroke="purple"
-            strokeWidth="1"
-            onResponderMove={() => {
-              alert("ok")
-            }}
-          />
-            <Rect
-            x="00"
-            y="100"
-            width="200"
-            height="100"
-            fill="rgb(0,0,255)"
-            strokeWidth="0.5"
-            stroke="rgb(0,0,0)"
-          />
-        </Svg>
-         */}
+        <Button  danger block icon iconRight>
+          <Icon name="x-square" type="Feather" />
+          <Text style={{color:"white"}}>Home</Text>
+        </Button>
       </View>
     );
   }
 }
 //fix any
 const mapStateToProps = (state: any) => {
-  console.log(state,"aaaaa")
-  return {
+  console.log(state, "aaaaa");
+  return {};
+};
 
-  }
-}
-
-const mapDispatchToProps = {
-  
-}
-
+const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
