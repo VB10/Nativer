@@ -13,9 +13,9 @@ class SettingsPage extends Component {
         </View>
         <ScrollView style={{ flex: 1 }} />
 
-        <Button  danger block icon iconRight>
+        <Button danger block rounded icon >
           <Icon name="x-square" type="Feather" />
-          <Text style={{color:"white"}}>Home</Text>
+          <Text style={{ color: "white" ,fontSize:20}}>Exit</Text>
         </Button>
       </View>
     );
