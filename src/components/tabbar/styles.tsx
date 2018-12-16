@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
   },
   iconButton: {
     backgroundColor: "#e9e9ef",
-    
     borderBottomRightRadius: 100,
     borderBottomLeftRadius: 100,
     alignItems: "center"
