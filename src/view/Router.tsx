@@ -19,7 +19,7 @@ const AppRouter = Actions.create(
           navBar={SchoolNavBar}
         />
         <Scene component={SchoolsPage} hideNavBar />
-        <Scene key="tab2" component={settings} title="Settings"  initial/>
+        <Scene key="tab2" component={settings} title="Settings"  />
       </Scene>
     </Stack>
 );
