@@ -13,14 +13,14 @@ export class AppControl extends Component<IProps, IState> {
 
   componentDidMount() {
     //check user data
-    this.controlClient()
+    this.controlClient();
   }
   controlClient() {
     AsyncStorage.getItem(UserID).then(value => {
       if (value) {
         Actions.reset(tab);
       } else {
-          Actions.reset(login)
+        Actions.reset(login);
       }
     });
   }

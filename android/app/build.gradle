@@ -98,7 +98,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.hwa.a.nativerx"
+        applicationId "com.hwa.a.nativerx1"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -138,7 +138,6 @@ android {
 
 dependencies {
     compile project(':react-native-firebase')
-    compile project(':react-native-svg')
     compile project(':lottie-react-native')
     compile project(':react-native-fbsdk')
 

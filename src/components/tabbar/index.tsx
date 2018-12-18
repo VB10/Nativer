@@ -1,6 +1,11 @@
 import React, { Component } from "react";
-import { Text, View, Image, PixelRatio } from "react-native";
-import { Tab, Footer, FooterTab, Button, Icon, Thumbnail } from "native-base";
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  TouchableWithoutFeedback
+} from "react-native";
+import { Icon, Thumbnail } from "native-base";
 import { styles } from "./styles";
 import { Actions } from "react-native-router-flux";
 interface IProps {
@@ -17,10 +22,7 @@ enum CurrentTab {
   tab2
 }
 export class CustomTabBar extends Component<IProps, IState> {
-  componentWillMount = () => {
-    console.log(this.props, "Retry");
-    console.log(PixelRatio.get(), "font");
-  };
+  componentWillMount = () => {};
 
   constructor(props: IProps) {
     super(props);
@@ -32,21 +34,31 @@ export class CustomTabBar extends Component<IProps, IState> {
     };
   }
 
-  buttonTab = (data: string, bool: boolean, tab: CurrentTab) => {
-    return (
-      <Button onPress={() => this.onPress(bool, tab)}>
-        <View>
-          <Text>{data}</Text>
-          {bool ? <View style={styles.hr} /> : null}
-        </View>
-      </Button>
-    );
-  };
+  buttonTab = (data: string, bool: boolean, tab: CurrentTab) => (
+    <TouchableOpacity
+      style={styles.tabButton}
+      onPress={() => {
+        this.onPress(bool,tab)
+      }}
+    >
+      <Icon type="Feather" name={data} style={{
+        color : bool ? "red":"black"
+      }} />
+    </TouchableOpacity>
+  );
   buttonCenter = () => {
     return (
-      <Button rounded block style={styles.buttonCenter}>
-        <Icon name="layers" type="Feather" style={styles.icon} />
-      </Button>
+      <View style={styles.buttonCenter}>
+        <TouchableWithoutFeedback onPress={() => {}}>
+          <View style={styles.iconButton}>
+            <Image
+              source={require("../../images/a1.png")}
+              resizeMode="contain"
+              style={styles.image}
+            />
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
     );
   };
 
@@ -54,13 +66,11 @@ export class CustomTabBar extends Component<IProps, IState> {
     const { currentTab1, currentTab2 } = this.state;
 
     return (
-      <Footer>
-        <FooterTab style={styles.footer}>
-          {this.buttonTab("Schools", currentTab1, CurrentTab.tab1)}
-          {this.buttonCenter()}
-          {this.buttonTab("Settings", currentTab2, CurrentTab.tab2)}
-        </FooterTab>
-      </Footer>
+      <View style={styles.footer}>
+        {this.buttonTab("bookmark", currentTab1, CurrentTab.tab1)}
+        {this.buttonCenter()}
+        {this.buttonTab("cpu", currentTab2, CurrentTab.tab2)}
+      </View>
     );
   }
   onPress(bool: boolean, tab: CurrentTab) {
@@ -72,10 +82,10 @@ export class CustomTabBar extends Component<IProps, IState> {
         Actions.tab2();
         break;
       default:
-        Actions.pop()
+        Actions.pop();
         break;
     }
-    
+
     //if press current tab return but other tab change color
     this.setState({
       current: tab,

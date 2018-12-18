@@ -1,24 +1,35 @@
-import { StyleSheet, PixelRatio } from "react-native";
+import { StyleSheet, PixelRatio, Platform } from "react-native";
 
 export const styles = StyleSheet.create({
   buttonCenter: {
-    backgroundColor: "#ff8364",
-    flex: 1,
-    height: "100%",
-    bottom: 20,
-    justifyContent: "center",
+    flex: 0.8,
+    backgroundColor: "white"
+  },
+  image: {
+    height: 50,
+    width: 20 * PixelRatio.get(),
+    bottom: 10
+  },
+  iconButton: {
+    backgroundColor: "#e9e9ef",
+    borderBottomRightRadius: 100,
+    borderBottomLeftRadius: 100,
     alignItems: "center"
   },
-  icon: {
-    fontSize: 10 * PixelRatio.get(),
-    color: "white"
-  },
   footer: {
-    backgroundColor: "white",
-    flex: 1
+    backgroundColor: "transparent",
+    flexDirection: "row",
+    marginBottom: Platform.OS === "ios" ? 13:0,
+    height: 50
   },
   hr: {
     height: 1,
     backgroundColor: "red"
+  },
+  tabButton: {
+    flex: 1,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
