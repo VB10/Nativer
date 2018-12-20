@@ -16,7 +16,6 @@ export default class LoginPage extends Component<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
-    
     this.state = {};
   }
   componentWillMount = () => {

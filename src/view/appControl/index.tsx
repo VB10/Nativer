@@ -15,7 +15,6 @@ export class AppControl extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    console.log(getDatabase())
     //check user data
     this.controlClient();
   }

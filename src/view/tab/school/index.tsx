@@ -5,10 +5,8 @@ import { styles } from "../../login/styles";
 
 export class SchoolsPage extends Component {
   componentWillMount = () => {
-    console.log(this.props);
   };
   renderItem(val: string) {
-    const json = require("../../../images/airplay.svg");
     return (
       <View
         key={val}
