@@ -1,25 +1,22 @@
 import React, { Component } from "react";
-import { Text, View, FlatList, Image, ImageBackground } from "react-native";
-import { Card, CardItem, Grid, Col, Icon } from "native-base";
-import { styles } from "../../login/styles";
+import { View, FlatList,Text } from "react-native";
 import SchoolCard from "./card";
 import { connect } from "react-redux";
-import {getDatabase} from '@redux/actions/database'
+import { getDatabase } from "@redux/actions/database";
 import { bindActionCreators } from "redux";
 interface IState {}
 interface IProps {
   getAllDB: () => {};
-  schoolDatas: [Articles]
+  schoolDatas: [Articles];
 }
 
-export class SchoolsPage extends Component<IProps,IState> {
+export class SchoolsPage extends Component<IProps, IState> {
   componentWillMount = () => {
     this.props.getAllDB();
-    console.log(this.state)
-    
+    console.log(this.state);
   };
   renderItem(val: Articles) {
-    const {category,description,email,price,title } = val.data;
+    const { category, description, email, price, title } = val.data;
     return (
       <SchoolCard
         city={title}
@@ -30,26 +27,29 @@ export class SchoolsPage extends Component<IProps,IState> {
     );
   }
 
-
+  renderFlatList() {
+    return (
+      <FlatList
+        style={{ paddingTop: 15 }}
+        data={this.props.schoolDatas}
+        renderItem={({ item }) => this.renderItem(item)}
+      />
+    );
+  }
   render() {
-
     return (
       <View style={{ flex: 1 }}>
-        <FlatList
-          style={{ paddingTop: 15 }}
-          data={this.props.schoolDatas}
-          renderItem={({ item }) => this.renderItem(item)}
-        />
-      </View>
-    );
+    {this.props.schoolDatas.length > 0 ? this.renderFlatList() : <Text>Loading</Text> }
+    </View>
+    )
   }
 }
 
 const mapStateToProps = (state: any) => {
   return {
-    schoolDatas : state.databaseReducer
-  }
-}
+    schoolDatas: state.databaseReducer
+  };
+};
 
 function mapDispatchToProps(dispatch: any) {
   return {
@@ -57,4 +57,7 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(SchoolsPage) ;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SchoolsPage);
