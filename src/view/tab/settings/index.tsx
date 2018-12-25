@@ -12,32 +12,17 @@ import {
   Right,
   Switch
 } from "native-base";
-import { getDatabase } from "../../../redux/actions/database";
 import { bindActionCreators } from "redux";
 
-interface IState {
-
-}
-interface IProps {
-  getAllDB : ()=>{}
-}
-class SettingsPage extends Component<IProps,IState> {
-  
-  constructor(props:IProps) {
-    super(props)
-  
-    this.state = {
-       
-    }
+interface IState {}
+interface IProps {}
+class SettingsPage extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+    this.state = {};
   }
-  
-  
-  componentDidMount() {
-    this.props.getAllDB()
 
-
-
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -101,16 +86,12 @@ class SettingsPage extends Component<IProps,IState> {
 }
 //fix any
 const mapStateToProps = (state: any) => {
-  console.log(state, "come to besiktas :) ")
-  
   return {};
 };
 
 function mapDispatchToProps(dispatch: any) {
-  return {
-    getAllDB : bindActionCreators(getDatabase, dispatch)
-  }
-};
+  return {};
+}
 
 export default connect(
   mapStateToProps,

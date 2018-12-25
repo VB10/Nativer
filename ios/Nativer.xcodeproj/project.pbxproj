@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -43,9 +42,10 @@
 		350C778121C06F6B00CB3D94 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 350C778021C06F6B00CB3D94 /* FirebaseInstanceID.framework */; };
 		350C778321C06F9200CB3D94 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 350C778221C06F9200CB3D94 /* GoogleAppMeasurement.framework */; };
 		350C77C521C0711C00CB3D94 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 350C77C421C0711C00CB3D94 /* GoogleService-Info.plist */; };
+		35BC711321D2DCBB00E73B70 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35BC70E621D2DAEE00E73B70 /* FBSDKCoreKit.framework */; };
+		35BC711521D2DCC200E73B70 /* FacebookSDKStrings.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 35BC711421D2DCC200E73B70 /* FacebookSDKStrings.bundle */; };
 		35C5C6FF21AF47460036B319 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C5C6FB21AF47460036B319 /* FBSDKLoginKit.framework */; };
 		35C5C70021AF47460036B319 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C5C6FC21AF47460036B319 /* FBSDKShareKit.framework */; };
-		35C5C70121AF47460036B319 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C5C6FD21AF47460036B319 /* FBSDKCoreKit.framework */; };
 		35C5C70221AF47460036B319 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C5C6FE21AF47460036B319 /* Bolts.framework */; };
 		35EB2BA621B2F95300FEE812 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35EB2B9C21B2F92F00FEE812 /* Lottie.framework */; };
 		35EB2BA721B2F95300FEE812 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35EB2B9C21B2F92F00FEE812 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -463,6 +463,8 @@
 		350C778021C06F6B00CB3D94 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Pods/FirebaseInstanceID/Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		350C778221C06F9200CB3D94 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Pods/GoogleAppMeasurement/Frameworks/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
 		350C77C421C0711C00CB3D94 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		35BC70E621D2DAEE00E73B70 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		35BC711421D2DCC200E73B70 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKStrings.bundle; path = Frameworks/FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		35C5C6FB21AF47460036B319 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../../Documents/FacebookSDKs-iOS-4.38.1 2/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		35C5C6FC21AF47460036B319 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../../../Documents/FacebookSDKs-iOS-4.38.1 2/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		35C5C6FD21AF47460036B319 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../Documents/FacebookSDKs-iOS-4.38.1 2/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
@@ -516,6 +518,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35BC711521D2DCC200E73B70 /* FacebookSDKStrings.bundle in Frameworks */,
+				35BC711321D2DCBB00E73B70 /* FBSDKCoreKit.framework in Frameworks */,
 				350C778321C06F9200CB3D94 /* GoogleAppMeasurement.framework in Frameworks */,
 				350C778121C06F6B00CB3D94 /* FirebaseInstanceID.framework in Frameworks */,
 				350C777F21C06E9B00CB3D94 /* FIRAnalyticsConnector.framework in Frameworks */,
@@ -534,7 +538,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				35C5C70221AF47460036B319 /* Bolts.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
-				35C5C70121AF47460036B319 /* FBSDKCoreKit.framework in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				DEE152451407463D973DDB86 /* libRCTFBSDK.a in Frameworks */,
 				7F2AEFADD5BC418FB679F101 /* libLottieReactNative.a in Frameworks */,
@@ -693,6 +696,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35BC711421D2DCC200E73B70 /* FacebookSDKStrings.bundle */,
+				35BC70E621D2DAEE00E73B70 /* FBSDKCoreKit.framework */,
 				350C778221C06F9200CB3D94 /* GoogleAppMeasurement.framework */,
 				350C778021C06F6B00CB3D94 /* FirebaseInstanceID.framework */,
 				350C775121C06E9B00CB3D94 /* FIRAnalyticsConnector.framework */,
@@ -1683,6 +1688,7 @@
 					"$(PROJECT_DIR)/Pods/FirebaseAnalytics/Frameworks",
 					"$(PROJECT_DIR)/Pods/FirebaseInstanceID/Frameworks",
 					"$(PROJECT_DIR)/Pods/GoogleAppMeasurement/Frameworks",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1717,6 +1723,7 @@
 					"$(PROJECT_DIR)/Pods/FirebaseAnalytics/Frameworks",
 					"$(PROJECT_DIR)/Pods/FirebaseInstanceID/Frameworks",
 					"$(PROJECT_DIR)/Pods/GoogleAppMeasurement/Frameworks",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

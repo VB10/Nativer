@@ -4,10 +4,7 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import { DataSnapshot } from "react-native-firebase/database";
 
-interface Articles {
-  key: String | null;
-  data: [];
-}
+
 
 export function getDatabase() {
   return (dispatch: any) => {
