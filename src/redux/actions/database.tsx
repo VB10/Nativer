@@ -15,9 +15,7 @@ export function getDatabase() {
       .database()
       .ref("articles/")
       .once("value", function(snapshot) {
-        console.log("bb");
         let arrArticles: [Articles] = [];
-
         snapshot.forEach((a: DataSnapshot) => {
           if (!a.key) return true;
           arrArticles.push({ key: a.key, data: a.val() });

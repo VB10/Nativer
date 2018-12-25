@@ -101,7 +101,7 @@ class SettingsPage extends Component<IProps,IState> {
 }
 //fix any
 const mapStateToProps = (state: any) => {
-  console.log(state, "come to besiktas :)")
+  console.log(state, "come to besiktas :) ")
   
   return {};
 };
