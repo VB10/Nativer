@@ -1,10 +1,6 @@
 import firebase from "react-native-firebase";
 import { GetAction } from "../types";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "redux";
 import { DataSnapshot } from "react-native-firebase/database";
-
-
 
 export function getDatabase() {
   return (dispatch: any) => {
@@ -12,10 +8,13 @@ export function getDatabase() {
       .database()
       .ref("articles/")
       .once("value", function(snapshot) {
-        let arrArticles: [Articles] = [];
-        snapshot.forEach((a: DataSnapshot) => {
-          if (!a.key) return true;
-          arrArticles.push({ key: a.key, data: a.val() });
+        //default deger ataması için any
+        let arrArticles: [Articles] | any = [];
+
+        //gelen datalar keyvalue geldiğinde bunları standart bir yapıya çevriyoruz
+        snapshot.forEach((data: DataSnapshot) => {
+          if (!data.key) return true;
+          arrArticles.push({ key: data.key, data: data.val() });
           return false;
         });
 

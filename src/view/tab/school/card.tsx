@@ -1,28 +1,23 @@
 import React, { Component } from "react";
-import { Text, View, ImageBackground } from "react-native";
+import { Text, View, ImageBackground, TouchableOpacity } from "react-native";
 import { Icon } from "native-base";
 import { cardStyles } from "./styles";
-interface IState {}
+import { Actions } from "react-native-router-flux";
+import { PageKey } from "../../../util";
 interface IProps {
   city: string;
   schoolName: string;
   studentCount: number;
   schoolImage: string;
+  onPress :()=>void
 }
 
-export class SchoolCard extends Component<IProps, IState> {
-
-    componentWillMount = () => {
-        this.checkProps();
-    }
-    
-    checkProps() {
-        //TODO CHECK DATA 
-    }
-  render() {
+export const  SchoolCard = (val : IProps) => {
     return (
-        <View
-        style={{ height: 150, marginBottom: 20, flexDirection: "row" }}
+        <TouchableOpacity
+        style={cardStyles.container}
+        activeOpacity={1}
+        onPress={val.onPress}
         >
         <View style={cardStyles.subView} />
         <View style={cardStyles.contentView}>
@@ -32,24 +27,24 @@ export class SchoolCard extends Component<IProps, IState> {
           >
             <View style={cardStyles.rightTopItem}>
               <Text style={cardStyles.rightTopTextStyle}>
-                {this.props.city}
+                {val.city}
               </Text>
             </View>
             <View style={cardStyles.bottomItem}>
               <Text style={cardStyles.bottomLeftText}>
-                {this.props.schoolName}
+                {val.schoolName}
               </Text>
-              {this.renderStudentCount(this.props.studentCount)}
+              {renderStudentCount(val.studentCount)}
             </View>
             <View />
           </ImageBackground>
         </View>
         <View style={cardStyles.subView} />
-      </View>
+      </TouchableOpacity>
     );
   }
 
-  renderStudentCount(val: number) {
+  const renderStudentCount = (val: number)=> {
     return (
       <View style={cardStyles.rightBottomItem}>
         <Icon name="users" type="Feather" style={cardStyles.rightBottomIcon} />
@@ -57,6 +52,6 @@ export class SchoolCard extends Component<IProps, IState> {
       </View>
     );
   }
-}
+
 
 export default SchoolCard;
