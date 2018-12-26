@@ -4,6 +4,9 @@ import { UserID } from "../const";
 import LottieViev from "lottie-react-native";
 import { Actions } from "react-native-router-flux";
 import { tab, login } from "../../util";
+import { getDatabase } from "../../redux/actions/database";
+
+
 interface IProps {}
 interface IState {}
 export class AppControl extends Component<IProps, IState> {

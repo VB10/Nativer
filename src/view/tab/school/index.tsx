@@ -1,122 +1,63 @@
 import React, { Component } from "react";
-import { Text, View, FlatList, Image, ImageBackground } from "react-native";
-import { Card, CardItem, Grid, Col, Icon } from "native-base";
-import { styles } from "../../login/styles";
+import { View, FlatList,Text } from "react-native";
+import SchoolCard from "./card";
+import { connect } from "react-redux";
+import { getDatabase } from "@redux/actions/database";
+import { bindActionCreators } from "redux";
+interface IState {}
+interface IProps {
+  getAllDB: () => {};
+  schoolDatas: [Articles];
+}
 
-export class SchoolsPage extends Component {
+export class SchoolsPage extends Component<IProps, IState> {
   componentWillMount = () => {
-    console.log(this.props);
+    this.props.getAllDB();
+    console.log(this.state);
   };
-  renderItem(val: string) {
-    const json = require("../../../images/airplay.svg");
+  renderItem(val: Articles) {
+    const { category, description, email, price, title } = val.data;
     return (
-      <View
-        key={val}
-        style={{ height: 150, marginBottom: 20, flexDirection: "row" }}
-      >
-        <View style={{ flex: 0.1 }} />
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "white",
-            borderRadius: 10,
-            flexDirection: "row"
-          }}
-        >
-          <View
-            style={{
-              flex: 0.05,
-              backgroundColor: "#fed000",
-              borderTopLeftRadius: 10,
-              borderBottomLeftRadius: 10
-            }}
-          />
-          <ImageBackground
-            style={{ flex: 1 }}
-            source={require("../../../images/school_d.jpg")}
-          >
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "flex-start",
-                alignItems: "flex-end",
-                bottom: 10
-              }}
-            >
-              <Text
-                style={{
-                  backgroundColor: "#fed000",
-                  color: "rgba(48,56,65,0.7)",
-                  padding: 10
-                }}
-              >
-                Pendik
-              </Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: "rgba(0,0,0,0.4)",
-                flex: 0.25,
-                alignItems: "center",
-                paddingLeft: 5,
-                flexDirection: "row"
-              }}
-            >
-              <Text style={{ color: "white", fontWeight: "500" }}>{val}</Text>
-              {this.renderStudentCount(50)}
-            </View>
-            <View />
-          </ImageBackground>
-        </View>
-
-        <View style={{ flex: 0.1 }} />
-      </View>
+      <SchoolCard
+        city={title}
+        schoolImage="@image/school_d"
+        schoolName={description}
+        studentCount={price}
+      />
     );
   }
 
-  renderStudentCount(val: number) {
+  renderFlatList() {
     return (
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          flex: 1,
-          marginRight: 5,
-          justifyContent: "flex-end"
-        }}
-      >
-        <Icon
-          name="users"
-          type="Feather"
-          style={{
-            color: "rgba(255,255,255,0.7)",
-            fontSize: 20,
-            marginRight: 2
-          }}
-        />
-        <Text style={{ color: "rgba(255,255,255,0.7)" }}>{val}+</Text>
-      </View>
+      <FlatList
+        style={{ paddingTop: 15 }}
+        data={this.props.schoolDatas}
+        renderItem={({ item }) => this.renderItem(item)}
+      />
     );
   }
-
   render() {
-    var items = [
-      "Kurt Doğmuş İlk Okulu",
-      "Bükdere Ana Okulu",
-      "Abdullah Ömür İlk Okulu "
-    ];
-
     return (
       <View style={{ flex: 1 }}>
-        <FlatList
-          style={{ paddingTop: 15 }}
-          data={items}
-          keyExtractor={item=> item.length.toString()}
-          renderItem={({ item }) => this.renderItem(item)}
-        />
-      </View>
-    );
+    {this.props.schoolDatas.length > 0 ? this.renderFlatList() : <Text>Loading</Text> }
+    </View>
+    )
   }
 }
 
-export default SchoolsPage;
+const mapStateToProps = (state: any) => {
+  return {
+    schoolDatas: state.databaseReducer
+  };
+};
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    getAllDB: bindActionCreators(getDatabase, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SchoolsPage);

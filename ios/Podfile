@@ -7,7 +7,7 @@ target 'Nativer' do
 
   # Pods for Nativer
   pod 'Firebase/Core'
-
+  pod 'Firebase/Database'
  
 
   target 'NativerTests' do

@@ -5,6 +5,8 @@ import android.app.Application;
 import com.facebook.CallbackManager;
 import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.database.RNFirebaseDatabasePackage;
+
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactNativeHost;
@@ -34,7 +36,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new RNFirebasePackage(),
             new LottiePackage(),
-              new FBSDKPackage(mCallbackManager)
+              new RNFirebaseDatabasePackage(),
+      new FBSDKPackage(mCallbackManager)
       );
     }
 
