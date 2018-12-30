@@ -19,6 +19,7 @@ export class AppControl extends Component<IProps, IState> {
     this.controlClient();
   }
   controlClient() {
+
     AsyncStorage.getItem(BaseEnum.UserID).then(value => {
       if (value) {
         Actions.reset(PageKey.tab);

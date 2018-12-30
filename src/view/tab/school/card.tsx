@@ -27,7 +27,7 @@ export const  SchoolCard = (val : IProps) => {
           >
             <View style={cardStyles.rightTopItem}>
               <Text style={cardStyles.rightTopTextStyle}>
-                {val.city}
+                {val.city} 
               </Text>
             </View>
             <View style={cardStyles.bottomItem}>

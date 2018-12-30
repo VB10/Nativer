@@ -10,13 +10,15 @@ export function getDatabase() {
       .once("value", function(snapshot) {
         //default deger ataması için any
         let arrArticles: [Articles] | any = [];
-
+        console.log(snapshot.val(),"gelen")
         //gelen datalar keyvalue geldiğinde bunları standart bir yapıya çevriyoruz
         snapshot.forEach((data: DataSnapshot) => {
           if (!data.key) return true;
           arrArticles.push({ key: data.key, data: data.val() });
           return false;
         });
+
+       
 
         return dispatch({
           type: GetAction.GET_DATABASE_SIMPLE,

@@ -2,7 +2,7 @@ import { StyleSheet, PixelRatio, Platform } from "react-native";
 
 export const styles = StyleSheet.create({
   buttonCenter: {
-    flex: 0.8,
+    flex: 1,
     backgroundColor: "white"
   },
   image: {
@@ -19,8 +19,6 @@ export const styles = StyleSheet.create({
   footer: {
     backgroundColor: "transparent",
     flexDirection: "row",
-    marginBottom: Platform.OS === "ios" ? 13:0,
-    height: 50
   },
   hr: {
     height: 1,
