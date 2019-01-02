@@ -31,3 +31,4 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.3
     },
 });
+
