@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView
 } from "react-native";
-import { Icon, Thumbnail } from "native-base";
+import { Icon, Thumbnail, Button } from "native-base";
 import { styles } from "./styles";
 import { Actions } from "react-native-router-flux";
 interface IProps {
@@ -46,7 +46,8 @@ export class CustomTabBar extends Component<IProps, IState> {
         type="Feather"
         name={data}
         style={{
-          color: bool ? "red" : "black"
+          color: bool ? "red" : "black",
+   
         }}
       />
     </TouchableOpacity>

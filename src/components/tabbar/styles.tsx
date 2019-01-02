@@ -12,12 +12,12 @@ export const styles = StyleSheet.create({
   },
   iconButton: {
     backgroundColor: "#e9e9ef",
-    borderBottomRightRadius: 100,
-    borderBottomLeftRadius: 100,
+    borderBottomRightRadius: 80,
+    borderBottomLeftRadius: 80,
     alignItems: "center"
   },
   footer: {
-    backgroundColor: "transparent",
+    backgroundColor: "white",
     flexDirection: "row",
   },
   hr: {
