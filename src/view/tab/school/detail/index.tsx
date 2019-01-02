@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Text, View, ScrollView, Animated, TextStyle } from "react-native";
 import { Header, Icon, Button } from "native-base";
 import {
-  interpolateFontx,
   _hideImageInterpolate,
   _hideViewInterpolate,
   _fontSizeInterpolate,

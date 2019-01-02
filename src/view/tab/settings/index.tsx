@@ -76,7 +76,7 @@ class SettingsPage extends Component<IProps, IState> {
         </Content>
 
         <View style={{ marginBottom: 20 }}>
-          <Button danger block  rounded  icon> 
+          <Button danger block rounded icon>
             {/* <Icon name="log-out" /> */}
             <Text style={{ color: "white", fontSize: 20 }}>Log out</Text>
           </Button>
