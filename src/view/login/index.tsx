@@ -77,11 +77,6 @@ export default class LoginPage extends Component<IProps, IState> {
                 this.loginAnimation = animation;
               }}
             />
-            {/* <Image
-              source={require("../../images/coffe.png")}
-              resizeMode="contain"
-              style={{ width: "100%" }}
-            /> */}
           </View>
           <View style={styles.buttonView}>
             <HRLine text="Sign up using" color="gray" />

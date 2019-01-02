@@ -3,9 +3,10 @@ import {
   View,
   Image,
   TouchableOpacity,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  SafeAreaView
 } from "react-native";
-import { Icon, Thumbnail } from "native-base";
+import { Icon, Thumbnail, Button } from "native-base";
 import { styles } from "./styles";
 import { Actions } from "react-native-router-flux";
 interface IProps {
@@ -38,12 +39,17 @@ export class CustomTabBar extends Component<IProps, IState> {
     <TouchableOpacity
       style={styles.tabButton}
       onPress={() => {
-        this.onPress(bool,tab)
+        this.onPress(bool, tab);
       }}
     >
-      <Icon type="Feather" name={data} style={{
-        color : bool ? "red":"black"
-      }} />
+      <Icon
+        type="Feather"
+        name={data}
+        style={{
+          color: bool ? "red" : "black",
+   
+        }}
+      />
     </TouchableOpacity>
   );
   buttonCenter = () => {
@@ -66,11 +72,11 @@ export class CustomTabBar extends Component<IProps, IState> {
     const { currentTab1, currentTab2 } = this.state;
 
     return (
-      <View style={styles.footer}>
+      <SafeAreaView style={styles.footer}>
         {this.buttonTab("bookmark", currentTab1, CurrentTab.tab1)}
         {this.buttonCenter()}
         {this.buttonTab("cpu", currentTab2, CurrentTab.tab2)}
-      </View>
+      </SafeAreaView>
     );
   }
   onPress(bool: boolean, tab: CurrentTab) {

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { View, FlatList,Text } from "react-native";
+import { View, FlatList, Text } from "react-native";
 import SchoolCard from "./card";
 import { connect } from "react-redux";
 import { getDatabase } from "@redux/actions/database";
 import { bindActionCreators } from "redux";
+import { Actions } from "react-native-router-flux";
+import { PageKey } from "../../../util";
 interface IState {}
 interface IProps {
   getAllDB: () => {};
@@ -23,10 +25,16 @@ export class SchoolsPage extends Component<IProps, IState> {
         schoolImage="@image/school_d"
         schoolName={description}
         studentCount={price}
+        onPress={() => {
+          this.onPress(val);
+        }}
       />
     );
   }
-
+  onPress(val: Articles) {
+ 
+    Actions.push(PageKey.tabSchoolDetail, { article: val,image:"https://picsum.photos/200/300" });
+  }
   renderFlatList() {
     return (
       <FlatList
@@ -39,9 +47,13 @@ export class SchoolsPage extends Component<IProps, IState> {
   render() {
     return (
       <View style={{ flex: 1 }}>
-    {this.props.schoolDatas.length > 0 ? this.renderFlatList() : <Text>Loading</Text> }
-    </View>
-    )
+        {this.props.schoolDatas.length > 0 ? (
+          this.renderFlatList()
+        ) : (
+          <Text>Loading</Text>
+        )}
+      </View>
+    );
   }
 }
 

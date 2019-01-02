@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Text, View, AsyncStorage, StyleSheet } from "react-native";
-import { UserID } from "../const";
 import LottieViev from "lottie-react-native";
 import { Actions } from "react-native-router-flux";
-import { tab, login } from "../../util";
-import { getDatabase } from "../../redux/actions/database";
+import { PageKey } from "../../util";
+import { BaseEnum } from "../const";
+
 
 
 interface IProps {}
@@ -19,11 +19,12 @@ export class AppControl extends Component<IProps, IState> {
     this.controlClient();
   }
   controlClient() {
-    AsyncStorage.getItem(UserID).then(value => {
+
+    AsyncStorage.getItem(BaseEnum.UserID).then(value => {
       if (value) {
-        Actions.reset(tab);
+        Actions.reset(PageKey.tab);
       } else {
-        Actions.reset(login);
+        Actions.reset(PageKey.login);
       }
     });
   }

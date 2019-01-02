@@ -51,5 +51,10 @@ export const cardStyles = StyleSheet.create({
   },
   rightBottomText: {
     color: "rgba(255,255,255,0.7)"
+  },
+  container: {
+    height: 150,
+    marginBottom: 20,
+    flexDirection: "row"
   }
 });

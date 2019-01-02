@@ -10,7 +10,8 @@ import {
   Left,
   Body,
   Right,
-  Switch
+  Switch,
+  Footer
 } from "native-base";
 import { bindActionCreators } from "redux";
 
@@ -26,7 +27,7 @@ class SettingsPage extends Component<IProps, IState> {
 
   render() {
     return (
-      <View style={{ flex: 0.9, marginTop: 10 }}>
+      <View style={{ flex: 1, marginTop: 10 }}>
         <View style={{ flex: 0.3 }}>
           <ProfileCard />
         </View>
@@ -74,9 +75,9 @@ class SettingsPage extends Component<IProps, IState> {
           </ListItem>
         </Content>
 
-        <View style={{ marginRight: 10, marginLeft: 10 }}>
+        <View style={{ marginBottom: 20 }}>
           <Button danger block rounded icon>
-            <Icon name="log-out" />
+            {/* <Icon name="log-out" /> */}
             <Text style={{ color: "white", fontSize: 20 }}>Log out</Text>
           </Button>
         </View>
