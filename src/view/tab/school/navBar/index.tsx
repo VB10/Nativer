@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Icon } from "native-base";
 
+
+//TODO FIX IT
 export class SchoolNavBar extends Component {
   render() {
     return (
