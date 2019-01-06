@@ -9,7 +9,6 @@ import settings from "./tab/settings";
 import SchoolDetailPage from "./tab/school/detail";
 import { PageKey } from "../util";
 import CenterAction from "./tab/center";
-import TabsExample from "../components/tabbar/test";
 
 const AppRouter = Actions.create(
   <Stack key="root">

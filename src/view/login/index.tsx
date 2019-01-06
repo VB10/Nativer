@@ -7,36 +7,40 @@ import ButtonType from "../../components/button/const";
 import { LoginManager, AccessToken } from "react-native-fbsdk";
 import { styles } from "./styles";
 import LottieViev from "lottie-react-native";
-import {UserID,UserToken} from '../const'
+import { BaseEnum } from "../const";
+import { Actions } from "react-native-router-flux";
+import { PageKey } from "../../util";
 
 interface IProps {}
 interface IState {}
 export default class LoginPage extends Component<IProps, IState> {
-  public loginAnimation: LottieViev;
+  public loginAnimation: LottieViev | null;
 
   constructor(props: IProps) {
     super(props);
+    this.loginAnimation = null;
     this.state = {};
   }
   componentWillMount = () => {
     //auto user check
-    // AsyncStorage.getItem(UserID).then((value) => {
-    //   console.log(value)
-    // })
-    // AccessToken.getCurrentAccessToken().then((key: any) => {
-    //   console.log(key);
-    //   //key is empty login expired
-    // });
-  };
-
-  checkUser() {
-      AsyncStorage.getItem(UserID).then((value) => {
-      console.log(value)
-    })
+    AsyncStorage.getItem(BaseEnum.UserID).then(value => {
+      Actions.reset(PageKey.tab);
+    });
     AccessToken.getCurrentAccessToken().then((key: any) => {
       console.log(key);
       //key is empty login expired
     });
+  };
+
+  checkUser() {
+    AsyncStorage.getItem(BaseEnum.UserID).then(value => {
+      console.log(value);
+      Actions.reset(PageKey.tab);
+    });
+    // AccessToken.getCurrentAccessToken().then((key: any) => {
+    //   console.log(key);
+    //   //key is empty login expired
+    // });
   }
   facebookLogin() {
     LoginManager.logInWithReadPermissions(["public_profile"])
@@ -49,13 +53,14 @@ export default class LoginPage extends Component<IProps, IState> {
               result.grantedPermissions.toString()
           );
           //TODO user id save data
-          AccessToken.getCurrentAccessToken().then((data: AccessToken) => {
+          AccessToken.getCurrentAccessToken().then(
+            (data: AccessToken | null) => {
+              AsyncStorage.setItem(BaseEnum.UserID, data!.userID.toString());
+              this.checkUser();
 
-
-            AsyncStorage.setItem(UserID, data.userID.toString())
-            this.checkUser();
-            // console.log(data.accessToken.toString(), "aaa");
-          });
+              // console.log(data.accessToken.toString(), "aaa");
+            }
+          );
         }
       })
       .catch((error: any) => {
@@ -93,13 +98,21 @@ export default class LoginPage extends Component<IProps, IState> {
             <CustomButton
               type={ButtonType.Google}
               onPress={() => {
-                this.loginAnimation.reset();
+                this.loginAnimation!.reset();
                 // alert("It's comming soon");
               }}
             />
           </View>
         </View>
-        <Footer style={styles.footer}>
+        <Footer
+          style={[
+            {
+              backgroundColor: "white",
+              borderColor: "white",
+              alignItems: "center"
+            }
+          ]}
+        >
           <Text style={styles.footerText}> Don’t have an account? </Text>
         </Footer>
       </Container>
