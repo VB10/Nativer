@@ -1,5 +1,5 @@
 import React from "react";
-import { Actions, Stack, Scene, Tabs } from "react-native-router-flux";
+import { Actions, Stack, Scene, Tabs, Modal } from "react-native-router-flux";
 import LoginPage from "./login";
 import AppControl from "./appControl";
 import CustomTabBar from "../components/tabbar";
@@ -8,6 +8,7 @@ import SchoolNavBar from "./tab/school/navBar";
 import settings from "./tab/settings";
 import SchoolDetailPage from "./tab/school/detail";
 import { PageKey } from "../util";
+import CenterAction from "./tab/center";
 
 const AppRouter = Actions.create(
   <Stack key="root">
@@ -19,8 +20,9 @@ const AppRouter = Actions.create(
         component={SchoolsPage}
         title="Schools"
         navBar={SchoolNavBar}
+        
       />
-
+      <Modal component={CenterAction} />
       <Scene key="tab2" component={settings} title="Settings" />
     </Tabs>
     <Scene
