@@ -7,48 +7,35 @@ import {
   Animated,
   Text
 } from "react-native";
-import { Icon, Thumbnail, Button } from "native-base";
+import { Icon } from "native-base";
 import { styles, _styles } from "./styles";
-import {
-  Actions,
-  Router,
-  RouterStatic,
-  RouterProps
-} from "react-native-router-flux";
-import { Action } from "redux";
+import { Actions } from "react-native-router-flux";
 interface IProps {
   text: string;
   color: string;
   navigation: Actions;
 }
 interface IState {
-  currentTab1: boolean;
-  currentTab2: boolean;
-  current: CurrentTab;
   fabs: Animated.Value[];
   animate: Animated.Value;
   open: boolean;
-}
-enum CurrentTab {
-  tab1,
-  tab2
+  selected: string;
 }
 
 export class CustomTabBar extends Component<IProps, IState> {
   isCenterIcon: boolean;
+  centerButtonNumber: Number;
   componentWillMount = () => {
-    console.log(this.props, "where");
-    console.log(this.props.navigation, "where2");
+    this.centerButtonNumber =
+      Number((this.props.navigation.state.routes.length / 2).toFixed()) - 1;
   };
 
   constructor(props: IProps) {
     super(props);
-
+    this.centerButtonNumber = 1;
     this.isCenterIcon = false;
     this.state = {
-      currentTab1: true,
-      currentTab2: false,
-      current: CurrentTab.tab1,
+      selected: "",
       fabs: [
         new Animated.Value(0),
         new Animated.Value(0),
@@ -59,26 +46,32 @@ export class CustomTabBar extends Component<IProps, IState> {
     };
   }
 
-  buttonTab = (data: string, bool: boolean, tab: string) => (
-    
+  buttonTab = (data: string, tab: string) => {
+    return (
       <TouchableOpacity
-      style={styles.tabButton}
-      onPress={() => {
-        this.props.navigation.navigate(tab);
-        this.handlePressFlyOuts(0);
-      }}
+        key={tab}
+        style={styles.tabButton}
+        onPress={() => {
+          this.setState({
+            selected: tab
+          });
+          console.log(tab);
+          this.props.navigation.navigate(tab);
+          if (this.state.open) this.handlePressFlyOuts(0);
+        }}
       >
         <Icon
           type="Feather"
           name={data}
           style={{
-            color: bool ? "red" : "black"
+            color: this.state.selected === tab ? "red" : "black"
           }}
         />
       </TouchableOpacity>
-  );
+    );
+  };
 
-  handlePressFlyOuts(toValue : number) {
+  handlePressFlyOuts(toValue: number) {
     const flyouts = this.state.fabs.map(
       (value: Animated.Value, index: number) => {
         return Animated.spring(value, {
@@ -96,12 +89,36 @@ export class CustomTabBar extends Component<IProps, IState> {
     ]).start();
   }
   handlePress = () => {
-    const toValue = this.state.open ? 0 : 1;
-    this.handlePressFlyOuts(toValue);
+    this.handlePressFlyOuts(this.state.open ? 0 : 1);
+    console.log(this.state.open);
     this.setState({
       open: !this.state.open
     });
   };
+
+  getRouterPage = () => {
+    return (
+      <Animated.View style={[{ flexDirection: "row", flex: 1 }]}>
+        {this.props.navigation.state.routes.map(
+          (element: any, index: number) => {
+            //center icon
+            if (index === this.centerButtonNumber) return this.buttonCenter();
+
+            return this.buttonTab(
+              element.routes[0].params.iconName,
+              element.key
+            );
+          }
+        )}
+      </Animated.View>
+    );
+  };
+  render() {
+    return (
+      <SafeAreaView style={styles.footer}>{this.getRouterPage()}</SafeAreaView>
+    );
+  }
+
   buttonCenter = () => {
     const getTransfromStyle = (animation: any) => {
       return {
@@ -117,7 +134,7 @@ export class CustomTabBar extends Component<IProps, IState> {
       transform: [{ rotate: buttonRotate }]
     };
     return (
-      <View style={styles.buttonCenter}>
+      <View style={styles.buttonCenter} key="centerButton">
         <View style={_styles.position}>
           {this.state.fabs.map((animation: Animated.Value, index: number) => {
             return (
@@ -147,61 +164,6 @@ export class CustomTabBar extends Component<IProps, IState> {
       </View>
     );
   };
-
-  getRouterPage = () => {
-    const centerButtonNumber =
-      Number((this.props.navigation.state.routes.length / 2).toFixed())
-    console.log(centerButtonNumber, "a");
-
-    return (
-      <Animated.View style={[{ flexDirection: "row", flex: 1 }]}>
-        {this.props.navigation.state.routes.map(
-          (element: any, index: number) => {
-            console.log(element)
-            
-            if (index === centerButtonNumber -1)
-              return this.buttonCenter();
-            return this.buttonTab("bookmark", false, element.key);
-
-            // <TouchableOpacity
-            //   key={element.key}
-            //   onPress={() => console.log(element.key)}
-            // >
-            //   <Text>{element.key} {index}</Text>
-            // </TouchableOpacity>
-          }
-        )}
-        {}
-      </Animated.View>
-    );
-  };
-  render() {
-    const { currentTab1, currentTab2 } = this.state;
-
-    return (
-      <SafeAreaView style={styles.footer}>{this.getRouterPage()}</SafeAreaView>
-    );
-  }
-  onPress(bool: boolean, tab: CurrentTab) {
-    const { current, currentTab1, currentTab2 } = this.state;
-    if (current === tab) return;
-
-    switch (tab) {
-      case CurrentTab.tab2:
-        Actions.tab2();
-        break;
-      default:
-        Actions.pop();
-        break;
-    }
-
-    //if press current tab return but other tab change color
-    this.setState({
-      current: tab,
-      currentTab1: !currentTab1,
-      currentTab2: !currentTab2
-    });
-  }
 }
 
 export default CustomTabBar;

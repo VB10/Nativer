@@ -20,10 +20,16 @@ const AppRouter = Actions.create(
         component={SchoolsPage}
         title="Schools"
         navBar={SchoolNavBar}
-        
+        iconName="bookmark"
       />
       <Modal component={CenterAction} />
-      <Scene key="tab2" component={settings} title="Settings" />
+      <Scene
+        key={PageKey.tabSettings}
+        component={settings}
+        isTransitioning
+        title="Settings"
+        iconName="cpu"
+      />
     </Tabs>
     <Scene
       key={PageKey.tabSchoolDetail}

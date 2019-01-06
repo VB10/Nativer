@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, SafeAreaView } from "react-native";
 import { Icon } from "native-base";
-
 
 //TODO FIX IT
 export class SchoolNavBar extends Component {
@@ -9,16 +8,16 @@ export class SchoolNavBar extends Component {
     return (
       <View
         style={{
-          height: 80,
-          flex: 1,
+          height: 50,
+          padding: 5,
+          justifyContent: "center",
           backgroundColor: "#fed000"
         }}
       >
         <View
           style={{
-            flex: 1,
             flexDirection: "row",
-            alignItems: "flex-end"
+            alignItems: "center"
           }}
         >
           <Text
@@ -38,7 +37,7 @@ export class SchoolNavBar extends Component {
             <Icon
               name="sliders"
               type="Feather"
-              style={{ flex: 1, color: "#2d4059" }}
+              style={{ flex: 1, fontSize: 30, color: "#2d4059" }}
             />
           </TouchableOpacity>
         </View>
