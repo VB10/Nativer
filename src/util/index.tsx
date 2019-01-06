@@ -4,7 +4,8 @@ enum PageKey {
   tab = "tabMain",
   tabSchool = "schoolsPage",
   tabHome = "tab1",
-  tabSchoolDetail = "tabSchoolDetail"
+  tabSchoolDetail = "tabSchoolDetail",
+  tabSettings = "tabSettings"
 }
 
 export {PageKey}
