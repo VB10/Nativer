@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import {
   View,
-  Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
   SafeAreaView,
   Animated,
-  StyleSheet
 } from "react-native";
 import { Icon, Thumbnail, Button } from "native-base";
-import { styles } from "./styles";
+import { styles,_styles } from "./styles";
 import { Actions } from "react-native-router-flux";
 interface IProps {
   text: string;
@@ -28,7 +26,6 @@ enum CurrentTab {
   tab2
 }
 
-
 export class CustomTabBar extends Component<IProps, IState> {
   componentWillMount = () => {};
 
@@ -44,7 +41,7 @@ export class CustomTabBar extends Component<IProps, IState> {
         new Animated.Value(0)
       ],
       animate: new Animated.Value(0),
-      open:false
+      open: false
     };
   }
 
@@ -70,7 +67,7 @@ export class CustomTabBar extends Component<IProps, IState> {
     const flyouts = this.state.fabs.map(
       (value: Animated.Value, index: number) => {
         return Animated.spring(value, {
-          toValue: (index + 1) * -90 * toValue,
+          toValue: (index + 1) * -60 * toValue,
           friction: 5
         });
       }
@@ -83,9 +80,8 @@ export class CustomTabBar extends Component<IProps, IState> {
       Animated.stagger(30, flyouts)
     ]).start();
     this.setState({
-        open: !this.state.open
-    })
-    
+      open: !this.state.open
+    });
   };
   buttonCenter = () => {
     const getTransfromStyle = (animation: any) => {
@@ -111,7 +107,9 @@ export class CustomTabBar extends Component<IProps, IState> {
                 style={[
                   _styles.button,
                   _styles.fab,
-                  {backgroundColor:this.state.open? "#9549FF":"transparent"},
+                  {
+                    backgroundColor: this.state.open ? "#9549FF" : "transparent"
+                  },
                   getTransfromStyle(animation)
                 ]}
               />
@@ -132,21 +130,11 @@ export class CustomTabBar extends Component<IProps, IState> {
   };
 
   render() {
-    // const backgroundInterpolate = this.state.animate.interpolate({
-    //   inputRange: [0, 1],
-    //   outputRange: ['rgb(90, 34, 153)', 'rgb(36, 11, 63)']
-    // });
-    // const backgroundStyle = {
-    //   backgroundColor: backgroundInterpolate
-    // }
-
     const { currentTab1, currentTab2 } = this.state;
 
     return (
       <SafeAreaView style={styles.footer}>
-        <Animated.View
-          style={[{ flexDirection: "row", flex: 1 }]}
-        >
+        <Animated.View style={[{ flexDirection: "row", flex: 1 }]}>
           {this.buttonTab("bookmark", currentTab1, CurrentTab.tab1)}
           {this.buttonCenter()}
           {this.buttonTab("cpu", currentTab2, CurrentTab.tab2)}
@@ -177,27 +165,3 @@ export class CustomTabBar extends Component<IProps, IState> {
 }
 
 export default CustomTabBar;
-
-const _styles = StyleSheet.create({
-  position: {
-    position: "absolute",
-    right: 30,
-    bottom: 30,
-  },
-  fab: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-
-  },
-  button: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  flyout: {
-    backgroundColor: "#9549FF"
-  },
-});

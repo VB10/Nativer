@@ -31,3 +31,22 @@ export const styles = StyleSheet.create({
     alignItems: "center"
   }
 });
+
+export const _styles = StyleSheet.create({
+  position: {
+    alignItems: "center",
+    alignSelf: 'center',
+  },
+  fab: {
+    position: "absolute",
+  },
+  button: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
+  flyout: {
+    backgroundColor: "#9549FF"
+  }
+});
+

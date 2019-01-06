@@ -13,7 +13,7 @@ const AppRouter = Actions.create(
   <Stack key="root">
     <Scene key={PageKey.login} hideNavBar component={LoginPage} />
     <Scene key={PageKey.control} hideNavBar component={AppControl} initial />
-    <Tabs key={PageKey.tab} hideNavBar   tabBarComponent={CustomTabBar}>
+    <Tabs key={PageKey.tab} hideNavBar tabBarComponent={CustomTabBar}>
       <Scene
         key={PageKey.tabSchool}
         component={SchoolsPage}

@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 30,
-    color: "#0b032d"
+    color: "#d22780"
     },
     contentView: {
         flex: 1,
