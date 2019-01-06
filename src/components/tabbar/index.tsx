@@ -7,9 +7,10 @@ import {
   Animated,
   Text
 } from "react-native";
-import { Icon } from "native-base";
+import { Icon, Left } from "native-base";
 import { styles, _styles } from "./styles";
 import { Actions } from "react-native-router-flux";
+import { PageKey } from "../../util";
 interface IProps {
   text: string;
   color: string;
@@ -35,7 +36,7 @@ export class CustomTabBar extends Component<IProps, IState> {
     this.centerButtonNumber = 1;
     this.isCenterIcon = false;
     this.state = {
-      selected: "",
+      selected: PageKey.tabSchool,
       fabs: [
         new Animated.Value(0),
         new Animated.Value(0),
@@ -152,6 +153,7 @@ export class CustomTabBar extends Component<IProps, IState> {
             );
           })}
         </View>
+      
         <TouchableWithoutFeedback onPress={this.handlePress}>
           <View style={[styles.iconButton]}>
             <Animated.Image

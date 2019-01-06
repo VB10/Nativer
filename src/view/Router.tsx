@@ -9,12 +9,14 @@ import settings from "./tab/settings";
 import SchoolDetailPage from "./tab/school/detail";
 import { PageKey } from "../util";
 import CenterAction from "./tab/center";
+import TabsExample from "../components/tabbar/test";
 
 const AppRouter = Actions.create(
   <Stack key="root">
     <Scene key={PageKey.login} hideNavBar component={LoginPage} />
     <Scene key={PageKey.control} hideNavBar component={AppControl} initial />
-    <Tabs key={PageKey.tab} hideNavBar tabBarComponent={CustomTabBar}>
+    <Tabs key={PageKey.tab} hideNavBar  tabBarComponent={CustomTabBar}> 
+    
       <Scene
         key={PageKey.tabSchool}
         component={SchoolsPage}
@@ -24,10 +26,11 @@ const AppRouter = Actions.create(
       />
       <Modal component={CenterAction} />
       <Scene
-        key={PageKey.tabSettings}
+        key="tab2"
         component={settings}
         isTransitioning
         title="Settings"
+        rightTitle="cpu"
         iconName="cpu"
       />
     </Tabs>
