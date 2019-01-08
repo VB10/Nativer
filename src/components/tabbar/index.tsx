@@ -5,7 +5,8 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
   Animated,
-  Text
+  Text,
+  Modal
 } from "react-native";
 import { Icon, Left } from "native-base";
 import { styles, _styles } from "./styles";
@@ -15,12 +16,14 @@ interface IProps {
   text: string;
   color: string;
   navigation: Actions;
+
 }
 interface IState {
   fabs: Animated.Value[];
   animate: Animated.Value;
   open: boolean;
   selected: string;
+  showModal:boolean
 }
 
 export class CustomTabBar extends Component<IProps, IState> {
@@ -43,7 +46,8 @@ export class CustomTabBar extends Component<IProps, IState> {
         new Animated.Value(0)
       ],
       animate: new Animated.Value(0),
-      open: false
+      open: false,
+      showModal:false
     };
   }
 
@@ -90,33 +94,50 @@ export class CustomTabBar extends Component<IProps, IState> {
     ]).start();
   }
   handlePress = () => {
-    this.handlePressFlyOuts(this.state.open ? 0 : 1);
-    console.log(this.state.open);
+    // this.handlePressFlyOuts(this.state.open ? 0 : 1);
+    // console.log(this.state.open);
+    // this.setState({
+    //   open: !this.state.open
+    // });
+    this.changeModal()
+  };
+
+  // getRouterPage = () => {
+  //   return (
+  //     <Animated.View style={[{ flexDirection: "row", flex: 1 }]}>
+  //       {this.props.navigation.state.routes.map(
+  //         (element: any, index: number) => {
+  //           //center icon
+  //           if (index === this.centerButtonNumber) return this.buttonCenter();
+
+  //           return this.buttonTab(
+  //             element.routes[0].params.iconName,
+  //             element.key
+  //           );
+  //         }
+  //       )}
+  //     </Animated.View>
+  //   );
+  // };
+  changeModal = ()=>{
     this.setState({
-      open: !this.state.open
-    });
-  };
-
-  getRouterPage = () => {
-    return (
-      <Animated.View style={[{ flexDirection: "row", flex: 1 }]}>
-        {this.props.navigation.state.routes.map(
-          (element: any, index: number) => {
-            //center icon
-            if (index === this.centerButtonNumber) return this.buttonCenter();
-
-            return this.buttonTab(
-              element.routes[0].params.iconName,
-              element.key
-            );
-          }
-        )}
-      </Animated.View>
-    );
-  };
+      showModal: !this.state.showModal
+    })
+  }
   render() {
     return (
-      <SafeAreaView style={styles.footer}>{this.getRouterPage()}</SafeAreaView>
+      <View>
+        <Modal transparent visible={this.state.showModal} animationType="slide" animated>
+          <TouchableOpacity
+            onPress={this.changeModal}
+            style={{ flex: 1, backgroundColor: "black", opacity: 0.7 }}></TouchableOpacity>
+        </Modal>
+        <SafeAreaView style={styles.footer}>
+          {this.buttonTab("bookmark", "schools")}
+          {this.buttonCenter()}
+          {this.buttonTab("cpu", "settings")}
+        </SafeAreaView>
+      </View>
     );
   }
 
@@ -145,7 +166,7 @@ export class CustomTabBar extends Component<IProps, IState> {
                   _styles.button,
                   _styles.fab,
                   {
-                    backgroundColor: this.state.open ? "#9549FF" : "transparent"
+                    backgroundColor: this.state.open ? "#9549FF" : "purple"
                   },
                   getTransfromStyle(animation)
                 ]}
@@ -153,7 +174,7 @@ export class CustomTabBar extends Component<IProps, IState> {
             );
           })}
         </View>
-      
+
         <TouchableWithoutFeedback onPress={this.handlePress}>
           <View style={[styles.iconButton]}>
             <Animated.Image
