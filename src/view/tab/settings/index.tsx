@@ -16,7 +16,9 @@ import {
 import { bindActionCreators } from "redux";
 
 interface IState {}
-interface IProps {}
+interface IProps {
+  data : string
+}
 class SettingsPage extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);

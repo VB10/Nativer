@@ -27,6 +27,8 @@ export class CustomTabBar extends Component<IProps, IState> {
   isCenterIcon: boolean;
   centerButtonNumber: Number;
   componentWillMount = () => {
+    console.table(this.props.navigation, "1");
+
     this.centerButtonNumber =
       Number((this.props.navigation.state.routes.length / 2).toFixed()) - 1;
   };
@@ -145,7 +147,7 @@ export class CustomTabBar extends Component<IProps, IState> {
                   _styles.button,
                   _styles.fab,
                   {
-                    backgroundColor: this.state.open ? "#9549FF" : "transparent"
+                    backgroundColor: this.state.open ? "#9549FF" : "purple"
                   },
                   getTransfromStyle(animation)
                 ]}
@@ -153,8 +155,12 @@ export class CustomTabBar extends Component<IProps, IState> {
             );
           })}
         </View>
-      
-        <TouchableWithoutFeedback onPress={this.handlePress}>
+
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Actions.customLight();
+          }}
+        >
           <View style={[styles.iconButton]}>
             <Animated.Image
               source={require("../../images/a1.png")}
