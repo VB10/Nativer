@@ -17,7 +17,6 @@ import settings from "./tab/settings";
 import SchoolDetailPage from "./tab/school/detail";
 import { PageKey } from "../util";
 import CenterAction from "./tab/center";
-import DemoLightbox from "../components/tabbar/lightbox";
 import TabMain from "./home";
 
 const AppRouter = Actions.create(
@@ -40,7 +39,7 @@ const AppRouter = Actions.create(
           />
 
           <Scene
-            key="tab2"
+            key={PageKey.tabSettings}
             component={settings}
             isTransitioning
             title="Settings"

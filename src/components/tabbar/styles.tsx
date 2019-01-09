@@ -36,6 +36,7 @@ export const _styles = StyleSheet.create({
   position: {
     alignItems: "center",
     alignSelf: 'center',
+    bottom:80
   },
   fab: {
     position: "absolute",

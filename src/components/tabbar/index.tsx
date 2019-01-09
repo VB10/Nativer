@@ -5,10 +5,9 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
   Animated,
-  Text,
   Modal
 } from "react-native";
-import { Icon, Left } from "native-base";
+import { Icon, Left, Button, Label, Text } from "native-base";
 import { styles, _styles } from "./styles";
 import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../util";
@@ -16,18 +15,16 @@ interface IProps {
   text: string;
   color: string;
   navigation: Actions;
-
 }
 interface IState {
   fabs: Animated.Value[];
   animate: Animated.Value;
   open: boolean;
   selected: string;
-  showModal:boolean
+  showModal: boolean;
 }
 
 export class CustomTabBar extends Component<IProps, IState> {
-  isCenterIcon: boolean;
   centerButtonNumber: Number;
   componentWillMount = () => {
     this.centerButtonNumber =
@@ -37,7 +34,6 @@ export class CustomTabBar extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.centerButtonNumber = 1;
-    this.isCenterIcon = false;
     this.state = {
       selected: PageKey.tabSchool,
       fabs: [
@@ -47,23 +43,16 @@ export class CustomTabBar extends Component<IProps, IState> {
       ],
       animate: new Animated.Value(0),
       open: false,
-      showModal:false
+      showModal: false
     };
   }
 
-  buttonTab = (data: string, tab: string) => {
+  buttonTab = (data: string, tab: PageKey) => {
     return (
       <TouchableOpacity
         key={tab}
         style={styles.tabButton}
-        onPress={() => {
-          this.setState({
-            selected: tab
-          });
-          console.log(tab);
-          this.props.navigation.navigate(tab);
-          if (this.state.open) this.handlePressFlyOuts(0);
-        }}
+        onPress={() => this.handleButtonTab(tab)}
       >
         <Icon
           type="Feather"
@@ -76,6 +65,21 @@ export class CustomTabBar extends Component<IProps, IState> {
     );
   };
 
+  handleButtonTab = (_pageKey: PageKey) => {
+    //case button and navigate page
+    switch (_pageKey) {
+      case PageKey.tabSettings:
+        Actions.tabSettings();
+        break;
+      case PageKey.tabSchool:
+        Actions.tabSchool();
+        break;
+      default:
+        break;
+    }
+    this.setState({ selected: _pageKey });
+    if (this.state.open) this.handlePressFlyOuts(0);
+  };
   handlePressFlyOuts(toValue: number) {
     const flyouts = this.state.fabs.map(
       (value: Animated.Value, index: number) => {
@@ -94,48 +98,77 @@ export class CustomTabBar extends Component<IProps, IState> {
     ]).start();
   }
   handlePress = () => {
-    // this.handlePressFlyOuts(this.state.open ? 0 : 1);
-    // console.log(this.state.open);
-    // this.setState({
-    //   open: !this.state.open
-    // });
-    this.changeModal()
+    this.changeModal();
   };
 
-  // getRouterPage = () => {
-  //   return (
-  //     <Animated.View style={[{ flexDirection: "row", flex: 1 }]}>
-  //       {this.props.navigation.state.routes.map(
-  //         (element: any, index: number) => {
-  //           //center icon
-  //           if (index === this.centerButtonNumber) return this.buttonCenter();
+  renderModalButton = () => {
+    const getTransfromStyle = (animation: any) => {
+      return {
+        transform: [{ translateY: animation }]
+      };
+    };
 
-  //           return this.buttonTab(
-  //             element.routes[0].params.iconName,
-  //             element.key
-  //           );
-  //         }
-  //       )}
-  //     </Animated.View>
-  //   );
-  // };
-  changeModal = ()=>{
+    return (
+      <View style={_styles.position}>
+        {this.state.fabs.map((animation: Animated.Value, index: number) => {
+          return (
+            <TouchableOpacity
+              key={index}
+              style={[
+                _styles.button,
+                _styles.fab,
+                {
+                  backgroundColor: this.state.open ? "#9549FF" : "purple"
+                },
+                getTransfromStyle(animation)
+              ]}
+            />
+          );
+        })}
+      </View>
+    );
+  };
+  callButtonView = () => {
+    this.setState(
+      {
+        open: !this.state.open
+      },
+      () => {
+        this.handlePressFlyOuts(this.state.open ? 1 : 0);
+      }
+    );
+  };
+  changeModal = () => {
     this.setState({
       showModal: !this.state.showModal
-    })
-  }
+    });
+  };
   render() {
     return (
       <View>
-        <Modal transparent visible={this.state.showModal} animationType="slide" animated>
+        <Modal
+          transparent
+          visible={this.state.showModal}
+          onShow={this.callButtonView}
+          onDismiss={this.callButtonView}
+          animationType="slide"
+        >
           <TouchableOpacity
             onPress={this.changeModal}
-            style={{ flex: 1, backgroundColor: "black", opacity: 0.7 }}></TouchableOpacity>
+            style={{
+              flex: 1,
+              backgroundColor: "rgba(0,0,0,0.8)",
+              alignItems: "flex-end",
+              justifyContent: "flex-end"
+            }}
+          >
+            {this.renderModalButton()}
+          </TouchableOpacity>
         </Modal>
         <SafeAreaView style={styles.footer}>
-          {this.buttonTab("bookmark", "schools")}
+          {this.buttonTab("bookmark", PageKey.tabSchool)}
           {this.buttonCenter()}
-          {this.buttonTab("cpu", "settings")}
+          {this.buttonTab("cpu", PageKey.tabSettings)}
         </SafeAreaView>
       </View>
     );
@@ -157,24 +190,6 @@ export class CustomTabBar extends Component<IProps, IState> {
     };
     return (
       <View style={styles.buttonCenter} key="centerButton">
-        <View style={_styles.position}>
-          {this.state.fabs.map((animation: Animated.Value, index: number) => {
-            return (
-              <TouchableOpacity
-                key={index}
-                style={[
-                  _styles.button,
-                  _styles.fab,
-                  {
-                    backgroundColor: this.state.open ? "#9549FF" : "purple"
-                  },
-                  getTransfromStyle(animation)
-                ]}
-              />
-            );
-          })}
-        </View>
-
         <TouchableWithoutFeedback onPress={this.handlePress}>
           <View style={[styles.iconButton]}>
             <Animated.Image
