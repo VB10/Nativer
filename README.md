@@ -1,3 +1,5 @@
+https://sonarcloud.io/api/project_badges/measure?project=VB10_Nativer&metric=alert_status
+
 # Nativer
 
 Nativer have a cloud,mobile,native code , React JS , React Native ... all of mobile features.
