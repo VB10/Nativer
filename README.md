@@ -2,7 +2,7 @@
 
 # Nativer
 
-Nativer have a cloud,mobile,native code , React JS , React Native ... all of mobile features.
+Nativer have a cloud & mobile worlds ,native code , React JS , React Native ... all of mobile features.
 
   - How to use firebase
   - Write Native Code
