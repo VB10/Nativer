@@ -1,5 +1,4 @@
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=VB10_Nativer&metric=alert_status)](https://sonarcloud.io/api/project_badges/measure?project=VB10_Nativer&metric=alert_status)
-
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=VB10_Nativer&metric=alert_status)](https://travis-ci.org/joemccann/dillinger)
 
 # Nativer
 
