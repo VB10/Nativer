@@ -99,9 +99,7 @@ export class CustomTabBar extends Component<IProps, IState> {
         transform: [{ translateY: animation }]
       };
     };
-
-    //TODO fix
-    return ( 
+    return (
       <View style={_styles.position}>
         {this.state.fabs.map((animation: Animated.Value, index: number) => {
           return (
@@ -146,15 +144,7 @@ export class CustomTabBar extends Component<IProps, IState> {
           onDismiss={this.callButtonView}
           animationType="slide"
         >
-          <TouchableOpacity
-            onPress={this.changeModal}
-            style={{
-              flex: 1,
-              backgroundColor: "rgba(0,0,0,0.8)",
-              alignItems: "flex-end",
-              justifyContent: "flex-end"
-            }}
-          >
+          <TouchableOpacity onPress={this.changeModal} style={styles.modal}>
             {this.renderModalButton()}
           </TouchableOpacity>
         </Modal>
@@ -168,11 +158,6 @@ export class CustomTabBar extends Component<IProps, IState> {
   }
 
   buttonCenter = () => {
-    const getTransfromStyle = (animation: any) => {
-      return {
-        transform: [{ translateY: animation }]
-      };
-    };
     const buttonRotate = this.state.animate.interpolate({
       inputRange: [0, 1],
       outputRange: ["0deg", "180deg"]
