@@ -5,6 +5,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white"
   },
+  modal: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.8)",
+    alignItems: "flex-end",
+    justifyContent: "flex-end"
+  },
   image: {
     height: 50,
     width: 20 * PixelRatio.get(),

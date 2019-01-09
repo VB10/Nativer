@@ -25,15 +25,10 @@ interface IState {
 }
 
 export class CustomTabBar extends Component<IProps, IState> {
-  centerButtonNumber: Number;
-  componentWillMount = () => {
-    this.centerButtonNumber =
-      Number((this.props.navigation.state.routes.length / 2).toFixed()) - 1;
-  };
+  componentWillMount = () => {};
 
   constructor(props: IProps) {
     super(props);
-    this.centerButtonNumber = 1;
     this.state = {
       selected: PageKey.tabSchool,
       fabs: [
@@ -48,19 +43,16 @@ export class CustomTabBar extends Component<IProps, IState> {
   }
 
   buttonTab = (data: string, tab: PageKey) => {
+    const iconFocus = {
+      color: this.state.selected === tab ? "red" : "black"
+    };
     return (
       <TouchableOpacity
         key={tab}
         style={styles.tabButton}
         onPress={() => this.handleButtonTab(tab)}
       >
-        <Icon
-          type="Feather"
-          name={data}
-          style={{
-            color: this.state.selected === tab ? "red" : "black"
-          }}
-        />
+        <Icon type="Feather" name={data} style={iconFocus} />
       </TouchableOpacity>
     );
   };
@@ -108,7 +100,8 @@ export class CustomTabBar extends Component<IProps, IState> {
       };
     };
 
-    return (
+    //TODO fix
+    return ( 
       <View style={_styles.position}>
         {this.state.fabs.map((animation: Animated.Value, index: number) => {
           return (
