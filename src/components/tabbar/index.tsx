@@ -76,7 +76,7 @@ export class CustomTabBar extends Component<IProps, IState> {
     const flyouts = this.state.fabs.map(
       (value: Animated.Value, index: number) => {
         return Animated.spring(value, {
-          toValue: (index + 1) * -60 * toValue,
+          toValue: index * 10 * toValue,
           friction: 5
         });
       }
@@ -105,9 +105,17 @@ export class CustomTabBar extends Component<IProps, IState> {
           return (
             <Animated.View
               style={[
-                { flexDirection: "row", width: 200,top:50, },
+                {
+                  flexDirection: "row",
+                  width: 200,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderWidth: 2,
+                  borderColor: "white",
+                },
                 getTransfromStyle(animation)
               ]}
+              key={index}
             >
               <TouchableOpacity
                 key={index}
@@ -115,8 +123,11 @@ export class CustomTabBar extends Component<IProps, IState> {
                   _styles.button,
                   { backgroundColor: this.state.open ? "#9549FF" : "purple" }
                 ]}
+                onPress={() => {
+                  alert("s")
+                }}
               />
-              <Text style={{color:"white"}}>asdasd</Text>
+              <Text style={{ color: "white" }}>asdasd</Text>
             </Animated.View>
           );
         })}
@@ -177,6 +188,7 @@ export class CustomTabBar extends Component<IProps, IState> {
     const buttonStyle = {
       transform: [{ rotate: buttonRotate }]
     };
+    //TODO fab button add?
     return (
       <View style={styles.buttonCenter} key="centerButton">
         <TouchableWithoutFeedback onPress={this.handlePress}>
