@@ -4,7 +4,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   SafeAreaView,
-  Animated
+  Animated,
+  PixelRatio
 } from "react-native";
 import { Icon, Left, Button, Label, Text } from "native-base";
 import { styles, _styles } from "./styles";
@@ -111,7 +112,7 @@ export class CustomTabBar extends Component<IProps, IState> {
                   alignItems: "center",
                   justifyContent: "center",
                   borderWidth: 2,
-                  borderColor: "white",
+                  borderColor: "white"
                 },
                 getTransfromStyle(animation)
               ]}
@@ -124,7 +125,7 @@ export class CustomTabBar extends Component<IProps, IState> {
                   { backgroundColor: this.state.open ? "#9549FF" : "purple" }
                 ]}
                 onPress={() => {
-                  alert("s")
+                  alert("s");
                 }}
               />
               <Text style={{ color: "white" }}>asdasd</Text>
