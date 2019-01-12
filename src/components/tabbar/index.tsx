@@ -5,12 +5,13 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
   Animated,
-  Text
+  PixelRatio
 } from "react-native";
-import { Icon, Left } from "native-base";
+import { Icon, Left, Button, Label, Text } from "native-base";
 import { styles, _styles } from "./styles";
 import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../util";
+import Modal from "react-native-modal";
 interface IProps {
   text: string;
   color: string;
@@ -21,20 +22,14 @@ interface IState {
   animate: Animated.Value;
   open: boolean;
   selected: string;
+  showModal: boolean;
 }
 
 export class CustomTabBar extends Component<IProps, IState> {
-  isCenterIcon: boolean;
-  centerButtonNumber: Number;
-  componentWillMount = () => {
-    this.centerButtonNumber =
-      Number((this.props.navigation.state.routes.length / 2).toFixed()) - 1;
-  };
+  componentWillMount = () => {};
 
   constructor(props: IProps) {
     super(props);
-    this.centerButtonNumber = 1;
-    this.isCenterIcon = false;
     this.state = {
       selected: PageKey.tabSchool,
       fabs: [
@@ -43,40 +38,46 @@ export class CustomTabBar extends Component<IProps, IState> {
         new Animated.Value(0)
       ],
       animate: new Animated.Value(0),
-      open: false
+      open: false,
+      showModal: false
     };
   }
 
-  buttonTab = (data: string, tab: string) => {
+  buttonTab = (data: string, tab: PageKey) => {
+    const iconFocus = {
+      color: this.state.selected === tab ? "red" : "black"
+    };
     return (
       <TouchableOpacity
         key={tab}
         style={styles.tabButton}
-        onPress={() => {
-          this.setState({
-            selected: tab
-          });
-          console.log(tab);
-          this.props.navigation.navigate(tab);
-          if (this.state.open) this.handlePressFlyOuts(0);
-        }}
+        onPress={() => this.handleButtonTab(tab)}
       >
-        <Icon
-          type="Feather"
-          name={data}
-          style={{
-            color: this.state.selected === tab ? "red" : "black"
-          }}
-        />
+        <Icon type="Feather" name={data} style={iconFocus} />
       </TouchableOpacity>
     );
   };
 
+  handleButtonTab = (_pageKey: PageKey) => {
+    //case button and navigate page
+    switch (_pageKey) {
+      case PageKey.tabSettings:
+        Actions.tabSettings();
+        break;
+      case PageKey.tabSchool:
+        Actions.tabSchool();
+        break;
+      default:
+        break;
+    }
+    this.setState({ selected: _pageKey });
+    if (this.state.open) this.handlePressFlyOuts(0);
+  };
   handlePressFlyOuts(toValue: number) {
     const flyouts = this.state.fabs.map(
       (value: Animated.Value, index: number) => {
         return Animated.spring(value, {
-          toValue: (index + 1) * -60 * toValue,
+          toValue: index * 10 * toValue,
           friction: 5
         });
       }
@@ -90,42 +91,96 @@ export class CustomTabBar extends Component<IProps, IState> {
     ]).start();
   }
   handlePress = () => {
-    this.handlePressFlyOuts(this.state.open ? 0 : 1);
-    console.log(this.state.open);
-    this.setState({
-      open: !this.state.open
-    });
+    this.changeModal();
   };
 
-  getRouterPage = () => {
-    return (
-      <Animated.View style={[{ flexDirection: "row", flex: 1 }]}>
-        {this.props.navigation.state.routes.map(
-          (element: any, index: number) => {
-            //center icon
-            if (index === this.centerButtonNumber) return this.buttonCenter();
-
-            return this.buttonTab(
-              element.routes[0].params.iconName,
-              element.key
-            );
-          }
-        )}
-      </Animated.View>
-    );
-  };
-  render() {
-    return (
-      <SafeAreaView style={styles.footer}>{this.getRouterPage()}</SafeAreaView>
-    );
-  }
-
-  buttonCenter = () => {
+  renderModalButton = () => {
     const getTransfromStyle = (animation: any) => {
       return {
         transform: [{ translateY: animation }]
       };
     };
+    return (
+      <View style={_styles.position}>
+        {this.state.fabs.map((animation: Animated.Value, index: number) => {
+          return (
+            <Animated.View
+              style={[
+                {
+                  flexDirection: "row",
+                  width: 200,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderWidth: 2,
+                  borderColor: "white"
+                },
+                getTransfromStyle(animation)
+              ]}
+              key={index}
+            >
+              <TouchableOpacity
+                key={index}
+                style={[
+                  _styles.button,
+                  { backgroundColor: this.state.open ? "#9549FF" : "purple" }
+                ]}
+                onPress={() => {
+                  alert("s");
+                }}
+              />
+              <Text style={{ color: "white" }}>asdasd</Text>
+            </Animated.View>
+          );
+        })}
+      </View>
+    );
+  };
+  callButtonView = () => {
+    this.setState(
+      {
+        open: !this.state.open
+      },
+      () => {
+        this.handlePressFlyOuts(this.state.open ? 0 : 1);
+      }
+    );
+  };
+  startViewAnimation = () => {
+    //open animation 1
+    this.handlePressFlyOuts(1);
+  };
+  stopViewAnimation = () => {
+    this.state.animate.setValue(0);
+  };
+  changeModal = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    });
+  };
+  render() {
+    return (
+      <View>
+        <Modal
+          backdropOpacity={0.8}
+          presentationStyle="overFullScreen"
+          isVisible={this.state.showModal}
+          onModalHide={this.stopViewAnimation}
+          onShow={this.startViewAnimation}
+        >
+          <TouchableOpacity onPress={this.changeModal} style={styles.modal}>
+            {this.renderModalButton()}
+          </TouchableOpacity>
+        </Modal>
+        <SafeAreaView style={styles.footer}>
+          {this.buttonTab("bookmark", PageKey.tabSchool)}
+          {this.buttonCenter()}
+          {this.buttonTab("cpu", PageKey.tabSettings)}
+        </SafeAreaView>
+      </View>
+    );
+  }
+
+  buttonCenter = () => {
     const buttonRotate = this.state.animate.interpolate({
       inputRange: [0, 1],
       outputRange: ["0deg", "180deg"]
@@ -134,26 +189,9 @@ export class CustomTabBar extends Component<IProps, IState> {
     const buttonStyle = {
       transform: [{ rotate: buttonRotate }]
     };
+    //TODO fab button add?
     return (
       <View style={styles.buttonCenter} key="centerButton">
-        <View style={_styles.position}>
-          {this.state.fabs.map((animation: Animated.Value, index: number) => {
-            return (
-              <TouchableOpacity
-                key={index}
-                style={[
-                  _styles.button,
-                  _styles.fab,
-                  {
-                    backgroundColor: this.state.open ? "#9549FF" : "transparent"
-                  },
-                  getTransfromStyle(animation)
-                ]}
-              />
-            );
-          })}
-        </View>
-      
         <TouchableWithoutFeedback onPress={this.handlePress}>
           <View style={[styles.iconButton]}>
             <Animated.Image

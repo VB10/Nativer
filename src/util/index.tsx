@@ -2,7 +2,7 @@ enum PageKey {
   login = "userLogin",
   control = "clientControl",
   tab = "tabMain",
-  tabSchool = "schoolsPage",
+  tabSchool = "tabSchool",
   tabHome = "tab1",
   tabSchoolDetail = "tabSchoolDetail",
   tabSettings = "tabSettings"
