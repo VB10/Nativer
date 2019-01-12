@@ -19,7 +19,7 @@ import { PageKey } from "../util";
 import CenterAction from "./tab/center";
 import TabMain from "./home";
 
-const AppRouter = Actions.create(
+const AppRouter =(
   <Overlay key="overlay">
       <Stack key="root">
         <Scene key={PageKey.login} hideNavBar component={LoginPage} />
@@ -53,7 +53,6 @@ const AppRouter = Actions.create(
           key={PageKey.tabSchoolDetail}
           hideTabBar={true}
           hideNavBar
-          onEnter={() => {}}
           component={SchoolDetailPage}
         />
       </Stack>

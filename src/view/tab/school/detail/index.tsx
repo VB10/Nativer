@@ -8,7 +8,7 @@ import {
   styles
 } from "./style";
 import { FontWeightProperty } from "csstype";
-import { CustomNavBa2r } from "../../../../components/navbar";
+import { HardwareAndroNavbar } from "../../../../components/navbar";
 interface IState {
   animated: Animated.Value;
 }
@@ -54,9 +54,10 @@ export class SchoolDetailPage extends Component<IProps, IState> {
     return (
       <View style={{ flex: 1 }}>
         <Animated.View style={[viewStyle]}>
-          <CustomNavBa2r
+          <HardwareAndroNavbar
             backgroundColor="#fed000"
             backButtonPress={this._onBackButtonPress}
+            isCustom={true}
           />
         </Animated.View>
         <Animated.Image

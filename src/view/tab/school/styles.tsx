@@ -58,3 +58,31 @@ export const cardStyles = StyleSheet.create({
     flexDirection: "row"
   }
 });
+export const _styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  position: {
+    right: 10
+  },
+  fab: {
+    position: "absolute",
+    bottom: 0,
+    right: 0
+  },
+  button: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  flyout: {
+    backgroundColor: "#9439FF"
+  },
+  plus: {
+    fontWeight: "bold",
+    fontSize: 30,
+    color: "#00768f"
+  }
+});
