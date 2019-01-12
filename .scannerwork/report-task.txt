@@ -1,0 +1,7 @@
+organization=vb10-github
+projectKey=VB10_Nativer
+serverUrl=https://sonarcloud.io
+serverVersion=7.6.0.20657
+dashboardUrl=https://sonarcloud.io/dashboard?id=VB10_Nativer
+ceTaskId=AWg06dHuqDdpA2vNW2J3
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWg06dHuqDdpA2vNW2J3

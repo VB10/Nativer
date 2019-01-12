@@ -4,13 +4,13 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   SafeAreaView,
-  Animated,
-  Modal
+  Animated
 } from "react-native";
 import { Icon, Left, Button, Label, Text } from "native-base";
 import { styles, _styles } from "./styles";
 import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../util";
+import Modal from "react-native-modal";
 interface IProps {
   text: string;
   color: string;
@@ -103,17 +103,21 @@ export class CustomTabBar extends Component<IProps, IState> {
       <View style={_styles.position}>
         {this.state.fabs.map((animation: Animated.Value, index: number) => {
           return (
-            <TouchableOpacity
-              key={index}
+            <Animated.View
               style={[
-                _styles.button,
-                _styles.fab,
-                {
-                  backgroundColor: this.state.open ? "#9549FF" : "purple"
-                },
+                { flexDirection: "row", width: 200,top:50, },
                 getTransfromStyle(animation)
               ]}
-            />
+            >
+              <TouchableOpacity
+                key={index}
+                style={[
+                  _styles.button,
+                  { backgroundColor: this.state.open ? "#9549FF" : "purple" }
+                ]}
+              />
+              <Text style={{color:"white"}}>asdasd</Text>
+            </Animated.View>
           );
         })}
       </View>
@@ -125,9 +129,16 @@ export class CustomTabBar extends Component<IProps, IState> {
         open: !this.state.open
       },
       () => {
-        this.handlePressFlyOuts(this.state.open ? 1 : 0);
+        this.handlePressFlyOuts(this.state.open ? 0 : 1);
       }
     );
+  };
+  startViewAnimation = () => {
+    //open animation 1
+    this.handlePressFlyOuts(1);
+  };
+  stopViewAnimation = () => {
+    this.state.animate.setValue(0);
   };
   changeModal = () => {
     this.setState({
@@ -138,11 +149,11 @@ export class CustomTabBar extends Component<IProps, IState> {
     return (
       <View>
         <Modal
-          transparent
-          visible={this.state.showModal}
-          onShow={this.callButtonView}
-          onDismiss={this.callButtonView}
-          animationType="slide"
+          backdropOpacity={0.8}
+          presentationStyle="overFullScreen"
+          isVisible={this.state.showModal}
+          onModalHide={this.stopViewAnimation}
+          onShow={this.startViewAnimation}
         >
           <TouchableOpacity onPress={this.changeModal} style={styles.modal}>
             {this.renderModalButton()}

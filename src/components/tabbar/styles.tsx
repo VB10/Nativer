@@ -7,9 +7,8 @@ export const styles = StyleSheet.create({
   },
   modal: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.8)",
-    alignItems: "flex-end",
-    justifyContent: "flex-end"
+    alignItems: "center",
+    justifyContent: "center"
   },
   image: {
     height: 50,
@@ -25,6 +24,7 @@ export const styles = StyleSheet.create({
   footer: {
     backgroundColor: "white",
     flexDirection: "row",
+    paddingBottom: 10,
   },
   hr: {
     height: 1,
@@ -42,10 +42,11 @@ export const _styles = StyleSheet.create({
   position: {
     alignItems: "center",
     alignSelf: 'center',
-    bottom:80
+  
   },
   fab: {
     position: "absolute",
+    top: 100,
   },
   button: {
     width: 40,

@@ -1,8 +1,8 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, PixelRatio } from "react-native";
 
 export const styles = StyleSheet.create({
   safeView: {
-    height: 100,
+    height: 20*PixelRatio.get(),
     padding: 5,
     justifyContent: "center",
     backgroundColor: "#fed000"
