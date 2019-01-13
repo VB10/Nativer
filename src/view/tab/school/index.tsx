@@ -8,12 +8,12 @@ import {
 } from "react-native";
 import SchoolCard from "./card";
 import { connect } from "react-redux";
-import { getDatabase } from "@redux/actions/database";
+import { getDatabase } from "../../../redux/actions/database";
 import { bindActionCreators } from "redux";
 import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../../util";
 import { Textarea, Button, StyleProvider, Text, Icon } from "native-base";
-import { _styles } from "./styles";
+import { _styles, _fabs, cardStyles, getTransformStyle } from "./styles";
 
 interface IFab {
   animation: Animated.Value;
@@ -30,35 +30,12 @@ interface IProps {
   getAllDB: () => {};
   schoolDatas: [Articles];
 }
-const getTransformStyle = (animation: any) => {
-  return {
-    transform: [{ translateX: animation }]
-  };
-};
+
 export class SchoolsPage extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      fabs: [
-        {
-          animation: new Animated.Value(0),
-          name: "Location",
-          icon: "locate",
-          iconColor: "red"
-        },
-        {
-          animation: new Animated.Value(0),
-          name: "Camera",
-          icon: "camera",
-          iconColor: "blue"
-        },
-        {
-          animation: new Animated.Value(0),
-          name: "Gallery",
-          icon: "photos",
-          iconColor: "green"
-        }
-      ],
+      fabs: _fabs,
       animate: new Animated.Value(0),
       open: false
     };
@@ -87,7 +64,7 @@ export class SchoolsPage extends Component<IProps, IState> {
     const toValue = this.state.open ? 0 : 1;
     const flyOuts = this.state.fabs.map((value: IFab, index: number) => {
       return Animated.spring(value.animation, {
-        toValue: index * -90 * toValue,
+        toValue: index * -85 * toValue,
         friction: 4
       });
     });
@@ -104,16 +81,7 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
   renderAddFeedScool() {
     return (
-      <View
-        style={{
-          backgroundColor: "white",
-          marginBottom: 20,
-          borderRadius: 10,
-          paddingBottom: 5,
-          marginRight: 5,
-          marginLeft: 5
-        }}
-      >
+      <View style={cardStyles.contentView}>
         <TextInput multiline />
         <Textarea
           rowSpan={3}
@@ -121,34 +89,21 @@ export class SchoolsPage extends Component<IProps, IState> {
           placeholderTextColor="gray"
           multiline
           blurOnSubmit
-          style={{
-            borderBottomWidth: 1,
-            borderBottomColor: "rgba(0,0,0,0.1)",
-            fontFamily: "Roboto"
-          }}
+          style={cardStyles.placeHolderStyle}
         />
 
-        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+        <View style={cardStyles.endContainer}>
           {this.renderModalButton()}
 
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 5
-            }}
-          >
+          <View style={cardStyles.endRight}>
             <Icon
-              name="attach"
+              name="add-circle"
               type="Ionicons"
-              style={{
-                margin: 5,
-                fontSize: 30
-              }}
+              style={cardStyles.addIcon}
               onPress={() => this.handlePressFlyOuts()}
             />
 
-            <Button rounded info>
+            <Button rounded style={{ backgroundColor: "#00adb5" }}>
               <Text>SHARE</Text>
             </Button>
           </View>
@@ -159,7 +114,12 @@ export class SchoolsPage extends Component<IProps, IState> {
   renderModalButton = () => {
     return (
       <View
-        style={[{ flexDirection: "row",opacity: this.state.open ? 1 : 0 }]}
+        style={[
+          {
+            flexDirection: "row",
+            opacity: this.state.open ? 1 : 0
+          }
+        ]}
       >
         {this.state.fabs.map((fab: IFab, index: number) => {
           return (
@@ -178,9 +138,7 @@ export class SchoolsPage extends Component<IProps, IState> {
                 type="Ionicons"
                 style={{ color: fab.iconColor }}
               />
-              <Text style={{ fontFamily: "Roboto", fontSize: 15 }}>
-                {fab.name}
-              </Text>
+              <Text style={cardStyles.fabText}>{fab.name}</Text>
             </TouchableOpacity>
           );
         })}
