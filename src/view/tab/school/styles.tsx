@@ -1,6 +1,10 @@
 import { StyleSheet, Animated } from "react-native";
 
-export const styles = StyleSheet.create({});
+export const getTransformStyle = (animation: any) => {
+  return {
+    transform: [{ translateX: animation }]
+  };
+};
 export const _fabs = [
   {
     animation: new Animated.Value(0),
@@ -21,12 +25,7 @@ export const _fabs = [
     iconColor: "green"
   }
 ];
-export const getTransformStyle = (animation: any) => {
-  return {
-    transform: [{ translateX: animation }]
-  };
-};
-export const cardStyles = StyleSheet.create({
+export const inputStyles = StyleSheet.create({
   contentView: {
     backgroundColor: "white",
     marginBottom: 20,
@@ -55,36 +54,93 @@ export const cardStyles = StyleSheet.create({
   addIcon: {
     margin: 5,
     fontSize: 30,
-    fontColor: "red",
     color: "#393e46"
-  },
-  container: {
-    height: 150,
-    marginBottom: 20,
-    flexDirection: "row"
   },
   fabText: {
     fontFamily: "Roboto",
     fontSize: 15
   }
 });
+export const cardStyles = StyleSheet.create({
+  contentView: {
+    flex: 1,
+    backgroundColor: "white",
+    borderRadius: 10,
+    flexDirection: "row"
+  },
+  imageBackground: {
+    flex: 1
+  },
+  rightTopItem: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
+    bottom: 10
+  },
+  rightTopTextStyle: {
+    backgroundColor: "#fed000",
+    color: "rgba(48,56,65,0.7)",
+    padding: 10
+  },
+  bottomItem: {
+    backgroundColor: "rgba(0,0,0,0.4)",
+    flex: 0.25,
+    alignItems: "center",
+    paddingLeft: 5,
+    flexDirection: "row"
+  },
+  bottomLeftText: {
+    color: "white",
+    fontWeight: "500"
+  },
+  subView: {
+    flex: 0.1
+  },
+  rightBottomItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+    marginRight: 5,
+    justifyContent: "flex-end"
+  },
+  rightBottomIcon: {
+    color: "rgba(255,255,255,0.7)",
+    fontSize: 20,
+    marginRight: 2
+  },
+  rightBottomText: {
+    color: "rgba(255,255,255,0.7)"
+  },
+  container: {
+    height: 150,
+    marginBottom: 20,
+    flexDirection: "row"
+  }
+});
 export const _styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   position: {
-    position: "absolute"
+    position: "absolute",
+   
   },
   fab: {
     position: "absolute",
-    alignSelf: "center",
-    right: 0
+    alignSelf: 'center',
+    right: 0,
   },
   button: {
+
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row"
+    flexDirection: 'row',
+    
   },
   flyout: {
     // backgroundColor: "#9439FF"
-    opacity: 0.55
+    opacity: 0.55,
+   
   },
   plus: {
     fontWeight: "bold",
@@ -92,3 +148,4 @@ export const _styles = StyleSheet.create({
     color: "#00768f"
   }
 });
+

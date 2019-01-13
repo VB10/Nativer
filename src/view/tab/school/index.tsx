@@ -13,7 +13,7 @@ import { bindActionCreators } from "redux";
 import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../../util";
 import { Textarea, Button, StyleProvider, Text, Icon } from "native-base";
-import { _styles, _fabs, cardStyles, getTransformStyle } from "./styles";
+import { _styles, _fabs, cardStyles, getTransformStyle, inputStyles } from "./styles";
 
 interface IFab {
   animation: Animated.Value;
@@ -43,7 +43,6 @@ export class SchoolsPage extends Component<IProps, IState> {
 
   componentWillMount = () => {
     this.props.getAllDB();
-    console.log(this.state);
   };
   renderItem(val: Articles) {
     const { category, description, email, price, title } = val.data;
@@ -81,7 +80,7 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
   renderAddFeedScool() {
     return (
-      <View style={cardStyles.contentView}>
+      <View style={inputStyles.contentView}>
         <TextInput multiline />
         <Textarea
           rowSpan={3}
@@ -89,17 +88,17 @@ export class SchoolsPage extends Component<IProps, IState> {
           placeholderTextColor="gray"
           multiline
           blurOnSubmit
-          style={cardStyles.placeHolderStyle}
+          style={inputStyles.placeHolderStyle}
         />
 
-        <View style={cardStyles.endContainer}>
+        <View style={inputStyles.endContainer}>
           {this.renderModalButton()}
 
-          <View style={cardStyles.endRight}>
+          <View style={inputStyles.endRight}>
             <Icon
               name="add-circle"
               type="Ionicons"
-              style={cardStyles.addIcon}
+              style={inputStyles.addIcon}
               onPress={() => this.handlePressFlyOuts()}
             />
 
@@ -138,7 +137,7 @@ export class SchoolsPage extends Component<IProps, IState> {
                 type="Ionicons"
                 style={{ color: fab.iconColor }}
               />
-              <Text style={cardStyles.fabText}>{fab.name}</Text>
+              <Text style={inputStyles.fabText}>{fab.name}</Text>
             </TouchableOpacity>
           );
         })}
