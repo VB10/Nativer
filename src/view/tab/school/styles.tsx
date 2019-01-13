@@ -60,25 +60,26 @@ export const cardStyles = StyleSheet.create({
 });
 export const _styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   position: {
-    right: 10
+    position: "absolute",
+   
   },
   fab: {
     position: "absolute",
-    bottom: 0,
-    right: 0
+    alignSelf: 'center',
+    right: 0,
   },
   button: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    flexDirection: 'row',
+    
   },
   flyout: {
-    backgroundColor: "#9439FF"
+    // backgroundColor: "#9439FF"
   },
   plus: {
     fontWeight: "bold",
@@ -86,3 +87,4 @@ export const _styles = StyleSheet.create({
     color: "#00768f"
   }
 });
+
