@@ -17,9 +17,6 @@ export function getDatabase() {
           arrArticles.push({ key: data.key, data: data.val() });
           return false;
         });
-
-       
-
         return dispatch({
           type: GetAction.GET_DATABASE_SIMPLE,
           payload: arrArticles
@@ -33,6 +30,7 @@ export function getDatabase() {
       });
   };
 }
+
 
 export function logout() {}
 

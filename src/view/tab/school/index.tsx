@@ -13,7 +13,14 @@ import { bindActionCreators } from "redux";
 import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../../util";
 import { Textarea, Button, StyleProvider, Text, Icon } from "native-base";
-import { _styles, _fabs, cardStyles, getTransformStyle, inputStyles } from "./styles";
+import {
+  _styles,
+  _fabs,
+  cardStyles,
+  getTransformStyle,
+  inputStyles
+} from "./styles";
+import { addUserFeed } from "../../../redux/actions/newsfeed";
 
 interface IFab {
   animation: Animated.Value;
@@ -28,7 +35,8 @@ interface IState {
 }
 interface IProps {
   getAllDB: () => {};
-  schoolDatas: [Articles];
+  addUserFeed: (val: NewsFeedChild) => {};
+  database: [Articles];
 }
 
 export class SchoolsPage extends Component<IProps, IState> {
@@ -102,13 +110,21 @@ export class SchoolsPage extends Component<IProps, IState> {
               onPress={() => this.handlePressFlyOuts()}
             />
 
-            <Button rounded style={{ backgroundColor: "#00adb5" }}>
+            <Button
+              onPress={() => this.onSharePress()}
+              rounded
+              style={{ backgroundColor: "#00adb5" }}
+            >
               <Text>SHARE</Text>
             </Button>
           </View>
         </View>
       </View>
     );
+  }
+
+  onSharePress() {
+    this.props.addUserFeed({ data: "veli" });
   }
   renderModalButton = () => {
     return (
@@ -154,7 +170,7 @@ export class SchoolsPage extends Component<IProps, IState> {
     return (
       <FlatList
         style={{ paddingTop: 15 }}
-        data={this.props.schoolDatas}
+        data={this.props.database}
         ListHeaderComponent={() => this.renderAddFeedScool()}
         renderItem={({ item }) => this.renderItem(item)}
       />
@@ -163,7 +179,7 @@ export class SchoolsPage extends Component<IProps, IState> {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        {this.props.schoolDatas.length > 0 ? (
+        {this.props.database.length > 0 ? (
           this.renderFlatList()
         ) : (
           <Text>Loading</Text>
@@ -175,13 +191,14 @@ export class SchoolsPage extends Component<IProps, IState> {
 
 const mapStateToProps = (state: any) => {
   return {
-    schoolDatas: state.databaseReducer
+    database: state.databaseReducer
   };
 };
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    getAllDB: bindActionCreators(getDatabase, dispatch)
+    getAllDB: bindActionCreators(getDatabase, dispatch),
+    addUserFeed: bindActionCreators(addUserFeed, dispatch)
   };
 }
 

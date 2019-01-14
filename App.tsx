@@ -11,7 +11,7 @@ import getTheme from "./native-base-theme/components";
 import material from "./native-base-theme/variables/material";
 
 const ConnectedRouter = connect()(Router);
-const store = createStore(reducers, applyMiddleware(logger, thunk));
+const store = createStore(reducers, applyMiddleware(thunk,logger));
 
 export default class App extends Component {
   render() {
