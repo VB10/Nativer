@@ -21,24 +21,19 @@ import {
   inputStyles
 } from "./styles";
 import { addUserFeed } from "../../../redux/actions/newsfeed";
+import { IFab } from "./baseSchool";
+import CommentCard from "./cardComment";
 
-interface IFab {
-  animation: Animated.Value;
-  name: string;
-  icon: string;
-  iconColor: string;
-}
-interface IState {
+export interface IState {
   fabs: IFab[];
   animate: Animated.Value;
   open: boolean;
 }
-interface IProps {
+export interface IProps {
   getAllDB: () => {};
   addUserFeed: (val: NewsFeedChild) => {};
   database: [Articles];
 }
-
 export class SchoolsPage extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
@@ -53,7 +48,16 @@ export class SchoolsPage extends Component<IProps, IState> {
     this.props.getAllDB();
   };
   renderItem(val: Articles) {
-    const { category, description, email, price, title } = val.data;
+    const { category, description, email, price, title, data } = val.data;
+
+    if (!title) {
+      return (
+        <CommentCard
+          comment={data}
+          profile={{ image: "", name: "", title: "" }}
+        />
+      );
+    }
     return (
       <SchoolCard
         city={title}

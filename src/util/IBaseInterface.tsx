@@ -8,6 +8,7 @@ interface ArticlesChild {
   email: string;
   price: number;
   category: string;
+  data: string;
 }
 
 interface INewsFeed {
