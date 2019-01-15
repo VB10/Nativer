@@ -47,7 +47,8 @@ export const CommentCard = (val: IProps) => {
         </Left>
       </CardItem>
       <CardItem cardBody>
-        <Image source={{ uri: "https://picsum.photos/200/300" }} />
+        <Image source={{ uri: "https://picsum.photos/200/300", height: 100 , width:100 }} />
+        <Text>{val.comment}</Text>
       </CardItem>
       <CardItem>
         <Left>

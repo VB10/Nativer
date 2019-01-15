@@ -50,6 +50,7 @@ export class SchoolsPage extends Component<IProps, IState> {
   renderItem(val: Articles) {
     const { category, description, email, price, title, data } = val.data;
 
+    
     if (!title) {
       return (
         <CommentCard
