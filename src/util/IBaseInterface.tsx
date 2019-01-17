@@ -9,6 +9,7 @@ interface ArticlesChild {
   price: number;
   category: string;
   data: string;
+  image: string;
 }
 
 interface INewsFeed {

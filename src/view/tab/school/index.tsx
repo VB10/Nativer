@@ -4,7 +4,8 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
-  TextInput
+  TextInput,
+  Image
 } from "react-native";
 import SchoolCard from "./card";
 import { connect } from "react-redux";
@@ -23,11 +24,13 @@ import {
 import { addUserFeed } from "../../../redux/actions/newsfeed";
 import { IFab } from "./baseSchool";
 import CommentCard from "./cardComment";
+import { string } from "prop-types";
 
 export interface IState {
   fabs: IFab[];
   animate: Animated.Value;
   open: boolean;
+  yPosition: number;
 }
 export interface IProps {
   getAllDB: () => {};
@@ -40,7 +43,8 @@ export class SchoolsPage extends Component<IProps, IState> {
     this.state = {
       fabs: _fabs,
       animate: new Animated.Value(0),
-      open: false
+      open: false,
+      yPosition: 0
     };
   }
 
@@ -48,13 +52,21 @@ export class SchoolsPage extends Component<IProps, IState> {
     this.props.getAllDB();
   };
   renderItem(val: Articles) {
-    const { category, description, email, price, title, data } = val.data;
+    const {
+      category,
+      description,
+      email,
+      price,
+      title,
+      data,
+      image
+    } = val.data;
 
-    
     if (!title) {
       return (
         <CommentCard
           comment={data}
+          image={image}
           profile={{ image: "", name: "", title: "" }}
         />
       );
@@ -115,11 +127,7 @@ export class SchoolsPage extends Component<IProps, IState> {
               onPress={() => this.handlePressFlyOuts()}
             />
 
-            <Button
-              onPress={() => this.onSharePress()}
-              rounded
-              style={{ backgroundColor: "#00adb5" }}
-            >
+            <Button onPress={() => this.onSharePress()} rounded>
               <Text>SHARE</Text>
             </Button>
           </View>
@@ -176,6 +184,23 @@ export class SchoolsPage extends Component<IProps, IState> {
       <FlatList
         style={{ paddingTop: 15 }}
         data={this.props.database}
+        onScroll={event => {
+          //TODO FIX IT
+          if (50 < event.nativeEvent.contentOffset.y) {
+            Actions.refresh({
+              key: PageKey.tabSchool,
+              hideNavBar: true,
+              hideTabBar: true
+            });
+          } else {
+            Actions.refresh({
+              key: PageKey.tabSchool,
+              hideNavBar: false,
+              hideTabBar: false
+            });
+          }
+        }}
+        onScrollBeginDrag={event => {}}
         ListHeaderComponent={() => this.renderAddFeedScool()}
         renderItem={({ item }) => this.renderItem(item)}
       />

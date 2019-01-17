@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  ImageBackground,
-  TouchableOpacity,
-  Image
-} from "react-native";
+import { Text, Image } from "react-native";
 import {
   Icon,
   Card,
@@ -18,8 +12,10 @@ import {
 } from "native-base";
 import { cardStyles } from "./styles";
 import SchoolCard from "./card";
+import { DeviceHelper } from "../../../util/DeviceHelper";
 interface IProps {
   comment: string;
+  image: string;
   profile: IProfile;
 }
 
@@ -46,8 +42,16 @@ export const CommentCard = (val: IProps) => {
           </Body>
         </Left>
       </CardItem>
-      <CardItem cardBody>
-        <Image source={{ uri: "https://picsum.photos/200/300", height: 100 , width:100 }} />
+      <CardItem cardBody style={{ flexDirection: "column" }}>
+      
+        <Image
+          source={{
+            uri: val.image,
+            height: 300,
+            width:DeviceHelper.width
+          }}
+          resizeMode="cover"
+        />
         <Text>{val.comment}</Text>
       </CardItem>
       <CardItem>
@@ -70,6 +74,5 @@ export const CommentCard = (val: IProps) => {
     </Card>
   );
 };
-
 
 export default CommentCard;
