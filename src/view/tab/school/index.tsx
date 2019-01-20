@@ -25,26 +25,33 @@ import { addUserFeed } from "../../../redux/actions/newsfeed";
 import { IFab } from "./baseSchool";
 import CommentCard from "./cardComment";
 import { string } from "prop-types";
+import { changeBarType } from "../../../redux/actions/bar_change";
 
 export interface IState {
   fabs: IFab[];
   animate: Animated.Value;
   open: boolean;
   yPosition: number;
+  hideBars: boolean;
 }
 export interface IProps {
   getAllDB: () => {};
   addUserFeed: (val: NewsFeedChild) => {};
+  changeBarType: (val: boolean) => {};
   database: [Articles];
 }
 export class SchoolsPage extends Component<IProps, IState> {
+  nativeEventY: Number;
   constructor(props: IProps) {
     super(props);
+    this.nativeEventY = 0;
+
     this.state = {
       fabs: _fabs,
       animate: new Animated.Value(0),
       open: false,
-      yPosition: 0
+      yPosition: 0,
+      hideBars: false
     };
   }
 
@@ -85,6 +92,8 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
 
   handlePressFlyOuts() {
+    //TODO add animation bar hidden schools
+    this.props.changeBarType(true);
     const toValue = this.state.open ? 0 : 1;
     const flyOuts = this.state.fabs.map((value: IFab, index: number) => {
       return Animated.spring(value.animation, {
@@ -185,21 +194,28 @@ export class SchoolsPage extends Component<IProps, IState> {
         style={{ paddingTop: 15 }}
         data={this.props.database}
         onScroll={event => {
-          //TODO FIX IT
-          if (50 < event.nativeEvent.contentOffset.y) {
-            Actions.refresh({
-              key: PageKey.tabSchool,
-              hideNavBar: true,
-              hideTabBar: true
-            });
-          } else {
-            Actions.refresh({
-              key: PageKey.tabSchool,
-              hideNavBar: false,
-              hideTabBar: false
-            });
-          }
+          // this.nativeEventY = event.nativeEvent.contentOffset.y;
+          // if (this.nativeEventY > 100 && !this.state.hideBars) {
+          //   this.setState({
+          //     hideBars: !this.state.hideBars
+          //   });
+          //   Actions.refresh({
+          //     key: PageKey.tabSchool,
+          //     hideNavBar: true,
+          //     hideTabBar: true
+          //   });
+          // } else if (this.nativeEventY < 100 && this.state.hideBars){
+          //   this.setState({
+          //     hideBars: !this.state.hideBars
+          //   });
+          //   Actions.refresh({
+          //     key: PageKey.tabSchool,
+          //     hideNavBar: false,
+          //     hideTabBar: false
+          //   });
+          // }
         }}
+        onScrollEndDrag={event => {}}
         onScrollBeginDrag={event => {}}
         ListHeaderComponent={() => this.renderAddFeedScool()}
         renderItem={({ item }) => this.renderItem(item)}
@@ -228,7 +244,8 @@ const mapStateToProps = (state: any) => {
 function mapDispatchToProps(dispatch: any) {
   return {
     getAllDB: bindActionCreators(getDatabase, dispatch),
-    addUserFeed: bindActionCreators(addUserFeed, dispatch)
+    addUserFeed: bindActionCreators(addUserFeed, dispatch),
+    changeBarType: bindActionCreators(changeBarType, dispatch)
   };
 }
 

@@ -21,7 +21,6 @@ const AppRouter = (
           key={PageKey.tabSchool}
           component={SchoolsPage}
           title="Schools"
-          
           navBar={SchoolNavBar}
           iconName="bookmark"
         />

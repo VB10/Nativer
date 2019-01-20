@@ -2,6 +2,7 @@ import { GetAction } from "../types";
 
 interface IAction {
   payload: [];
+  bar: any;
   type: GetAction;
 }
 interface IState {
@@ -15,7 +16,7 @@ export function databaseReducer(
   action: IAction
 ) {
   switch (action.type) {
-    case GetAction.GET_DATABASE_SIMPLE:
+    case GetAction.getDatabaseSimple:
       return action.payload;
     case GetAction.postData:
       return action.payload;

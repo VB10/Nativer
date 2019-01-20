@@ -18,7 +18,7 @@ export function getDatabase() {
           return false;
         });
         return dispatch({
-          type: GetAction.GET_DATABASE_SIMPLE,
+          type: GetAction.getDatabaseSimple,
           payload: arrArticles
         });
       })
