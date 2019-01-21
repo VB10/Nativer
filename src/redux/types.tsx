@@ -1,6 +1,8 @@
 enum GetAction {
-  GET_DATABASE_SIMPLE = "db_simple",
-  Failure = "fail"
+  getDatabaseSimple = "db_simple",
+  Failure = "fail",
+  postData = "post_feed",
+  changeBar = "navbar_hidden"
 }
 
 export { GetAction };

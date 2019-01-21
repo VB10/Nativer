@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Text, View, ImageBackground, TouchableOpacity } from "react-native";
 import { Icon } from "native-base";
 import { cardStyles } from "./styles";
-import { Actions } from "react-native-router-flux";
-import { PageKey } from "../../../util";
 interface IProps {
   city: string;
   schoolName: string;

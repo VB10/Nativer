@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, ScrollView, Animated, TextStyle } from "react-native";
-import { Header, Icon, Button } from "native-base";
+import { Header, Icon, Button, Left, Right, Body } from "native-base";
 import {
   _hideImageInterpolate,
   _hideViewInterpolate,
@@ -8,6 +8,7 @@ import {
   styles
 } from "./style";
 import { FontWeightProperty } from "csstype";
+import { HardwareAndroNavbar } from "../../../../components/navbar";
 interface IState {
   animated: Animated.Value;
 }
@@ -53,36 +54,11 @@ export class SchoolDetailPage extends Component<IProps, IState> {
     return (
       <View style={{ flex: 1 }}>
         <Animated.View style={[viewStyle]}>
-          <Header transparent style={{ backgroundColor: "#fed000" }}>
-            <Button
-              dark
-              iconRight
-              transparent
-              onPress={this._onBackButtonPress}
-            >
-              <Icon name="chevron-left" type="Feather" style={styles.icon} />
-            </Button>
-
-            <View style={styles.contentView}>
-              {this.textRender(
-                { fontSize: 18, fontWeight: "bold", color: "#d22780" },
-                "Kodu"
-              )}
-              {this.textRender(
-                { fontSize: 18, fontWeight: "500", color: "#5e227f" },
-                "Geliştir"
-              )}
-              {this.textRender(
-                { fontSize: 18, fontWeight: "bold", color: "#41a7b3" },
-                "Dünyayı"
-              )}
-              {this.textRender(
-                { fontSize: 18, fontWeight: "500", color: "#1fe5bd" },
-                "Değiştir"
-              )}
-            </View>
-            {/* <H3 style={{alignSelf:"center",fontWeight:"bold",color:"black",opacity:0.7}}>Kodu Geliştir Hayatı Değiştir!</H3> */}
-          </Header>
+          <HardwareAndroNavbar
+            backgroundColor="#fed000"
+            backButtonPress={this._onBackButtonPress}
+            isCustom={true}
+          />
         </Animated.View>
         <Animated.Image
           source={{ uri: this.props.image }}

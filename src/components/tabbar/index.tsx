@@ -128,7 +128,6 @@ export class CustomTabBar extends Component<IProps, IState> {
                   alert("s");
                 }}
               />
-              <Text style={{ color: "white" }}>asdasd</Text>
             </Animated.View>
           );
         })}

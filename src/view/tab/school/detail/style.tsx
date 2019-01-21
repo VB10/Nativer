@@ -18,17 +18,10 @@ export const styles = StyleSheet.create({
   header: {
     backgroundColor: "#fed000"
   },
-  icon: {
-    fontSize: 30,
-    color: "#d22780"
-    },
-    contentView: {
-        flex: 1,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        shadowColor: "black",
-        shadowOpacity: 0.3
-    },
+  view: {
+    flex: 1
+  },
+  image: {
+    backgroundColor: "red"
+  }
 });
-
