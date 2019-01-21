@@ -4,8 +4,7 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
-  TextInput,
-  Image
+  TextInput
 } from "react-native";
 import SchoolCard from "./card";
 import { connect } from "react-redux";
@@ -13,33 +12,28 @@ import { getDatabase } from "../../../redux/actions/database";
 import { bindActionCreators } from "redux";
 import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../../util";
-import { Textarea, Button, StyleProvider, Text, Icon } from "native-base";
-import {
-  _styles,
-  _fabs,
-  cardStyles,
-  getTransformStyle,
-  inputStyles
-} from "./styles";
+import { Textarea, Button, Text, Icon } from "native-base";
+import { _styles, _fabs, getTransformStyle, inputStyles } from "./styles";
 import { addUserFeed } from "../../../redux/actions/newsfeed";
-import { IFab } from "./baseSchool";
+import { IFab, fabName } from "./baseSchool";
 import CommentCard from "./cardComment";
-import { string } from "prop-types";
 import { changeBarType } from "../../../redux/actions/bar_change";
 
-export interface IState {
+interface IState {
   fabs: IFab[];
   animate: Animated.Value;
   open: boolean;
   yPosition: number;
   hideBars: boolean;
 }
-export interface IProps {
+
+interface IProps {
   getAllDB: () => {};
   addUserFeed: (val: NewsFeedChild) => {};
   changeBarType: (val: boolean) => {};
   database: [Articles];
 }
+
 export class SchoolsPage extends Component<IProps, IState> {
   nativeEventY: Number;
   constructor(props: IProps) {
@@ -55,6 +49,7 @@ export class SchoolsPage extends Component<IProps, IState> {
     };
   }
 
+  
   componentWillMount = () => {
     this.props.getAllDB();
   };
@@ -92,19 +87,21 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
 
   handlePressFlyOuts() {
-    //TODO add animation bar hidden schools
-    this.props.changeBarType(true);
+    // TODO add animation bar hidden schools
+    // this.props.changeBarType(true);
     const toValue = this.state.open ? 0 : 1;
     const flyOuts = this.state.fabs.map((value: IFab, index: number) => {
       return Animated.spring(value.animation, {
         toValue: index * -85 * toValue,
-        friction: 4
+        friction: 4,
+        useNativeDriver: true
       });
     });
     Animated.parallel([
       Animated.timing(this.state.animate, {
         toValue,
-        duration: 300
+        duration: 300,
+        useNativeDriver: true
       }),
       Animated.stagger(30, flyOuts)
     ]).start();
@@ -125,7 +122,7 @@ export class SchoolsPage extends Component<IProps, IState> {
           style={inputStyles.placeHolderStyle}
         />
 
-        <View style={inputStyles.endContainer}>
+        <Animated.View style={inputStyles.endContainer}>
           {this.renderModalButton()}
 
           <View style={inputStyles.endRight}>
@@ -140,7 +137,7 @@ export class SchoolsPage extends Component<IProps, IState> {
               <Text>SHARE</Text>
             </Button>
           </View>
-        </View>
+        </Animated.View>
       </View>
     );
   }
@@ -150,13 +147,8 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
   renderModalButton = () => {
     return (
-      <View
-        style={[
-          {
-            flexDirection: "row",
-            opacity: this.state.open ? 1 : 0
-          }
-        ]}
+      <Animated.View
+        style={[{ flexDirection: "row", opacity: this.state.open ? 1 : 0 }]}
       >
         {this.state.fabs.map((fab: IFab, index: number) => {
           return (
@@ -168,7 +160,9 @@ export class SchoolsPage extends Component<IProps, IState> {
                 _styles.flyout,
                 getTransformStyle(fab.animation)
               ]}
-              onPress={() => {}}
+              onPress={() => {
+                this.fabOnPress(fab.name);
+              }}
             >
               <Icon
                 name={fab.icon}
@@ -179,9 +173,22 @@ export class SchoolsPage extends Component<IProps, IState> {
             </TouchableOpacity>
           );
         })}
-      </View>
+      </Animated.View>
     );
   };
+  fabOnPress(val: fabName) {
+    switch (val) {
+      case fabName.camera:
+    
+      
+        
+        });
+        break;
+
+      default:
+        break;
+    }
+  }
   onPress(val: Articles) {
     Actions.push(PageKey.tabSchoolDetail, {
       article: val,
