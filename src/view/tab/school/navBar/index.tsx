@@ -21,7 +21,7 @@ export class SchoolNavBar extends Component {
 
   render() {
     return <SafeAreaView style={styles.safeView}>
-        {this.props.barVisibility ? <Text>oldu</Text> : <Text>OLMADI</Text>}
+        {/* {this.props.barVisibility ? <Text>oldu</Text> : <Text>OLMADI</Text>} */}
         <View style={[styles.contentView]}>
           <Text style={styles.text}>Schools</Text>
           <TouchableOpacity style={styles.touchableOpacity}>
