@@ -33,6 +33,8 @@
 	<string>1</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>add photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>library usage</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>library usaage</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -66,7 +68,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

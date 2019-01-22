@@ -18,6 +18,8 @@ import { addUserFeed } from "../../../redux/actions/newsfeed";
 import { IFab, fabName } from "./baseSchool";
 import CommentCard from "./cardComment";
 import { changeBarType } from "../../../redux/actions/bar_change";
+import ImagePicker from "react-native-image-crop-picker";
+
 
 interface IState {
   fabs: IFab[];
@@ -179,15 +181,23 @@ export class SchoolsPage extends Component<IProps, IState> {
   fabOnPress(val: fabName) {
     switch (val) {
       case fabName.camera:
-    
-      
-        
+        //TODO ADD TAKE PHOTO
+        ImagePicker.openPicker({
+          width: 300,
+          height: 400,
+          cropping: true
+        }).then((image: any) => {
+          console.log(image);
+        }).catch(() => {
+          console.log("error")
         });
         break;
-
+    
       default:
         break;
     }
+
+    
   }
   onPress(val: Articles) {
     Actions.push(PageKey.tabSchoolDetail, {
