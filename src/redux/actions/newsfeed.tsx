@@ -35,3 +35,22 @@ console.log("ok")
       });
   };
 }
+
+
+export function postImage(value: NewsFeedChild) {
+  console.log(value.data)
+    firebase
+      .storage()
+      .ref('/uploadOk.jpeg')
+      .putFile(
+        `${value.data}`
+      )
+      .then((val) => {
+        //TODO fix return download url 
+        console.log("success")
+      })
+      .catch((err) => {
+      
+        console.log(`${err} fail`)
+      })
+}

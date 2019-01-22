@@ -8,9 +8,9 @@ target 'Nativer' do
   # Pods for Nativer
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
  
 
-  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 

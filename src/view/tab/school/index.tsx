@@ -4,7 +4,8 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
-  TextInput
+  TextInput,
+  Image
 } from "react-native";
 import SchoolCard from "./card";
 import { connect } from "react-redux";
@@ -14,12 +15,11 @@ import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../../util";
 import { Textarea, Button, Text, Icon } from "native-base";
 import { _styles, _fabs, getTransformStyle, inputStyles } from "./styles";
-import { addUserFeed } from "../../../redux/actions/newsfeed";
+import { addUserFeed, postImage } from "../../../redux/actions/newsfeed";
 import { IFab, fabName } from "./baseSchool";
 import CommentCard from "./cardComment";
 import { changeBarType } from "../../../redux/actions/bar_change";
-import ImagePicker from "react-native-image-crop-picker";
-
+import ImagePicker, { ImageCrop } from "react-native-image-crop-picker";
 
 interface IState {
   fabs: IFab[];
@@ -27,6 +27,7 @@ interface IState {
   open: boolean;
   yPosition: number;
   hideBars: boolean;
+  imageUploadSource: string;
 }
 
 interface IProps {
@@ -47,11 +48,11 @@ export class SchoolsPage extends Component<IProps, IState> {
       animate: new Animated.Value(0),
       open: false,
       yPosition: 0,
-      hideBars: false
+      hideBars: false,
+      imageUploadSource: ""
     };
   }
 
-  
   componentWillMount = () => {
     this.props.getAllDB();
   };
@@ -124,6 +125,15 @@ export class SchoolsPage extends Component<IProps, IState> {
           style={inputStyles.placeHolderStyle}
         />
 
+        {this.state.imageUploadSource ? (
+          <Image
+            source={{
+              uri: this.state.imageUploadSource,
+              width: 100,
+              height: 200
+            }}
+          />
+        ) : null}
         <Animated.View style={inputStyles.endContainer}>
           {this.renderModalButton()}
 
@@ -145,7 +155,8 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
 
   onSharePress() {
-    this.props.addUserFeed({ data: "veli" });
+    postImage({ data: this.state.imageUploadSource });
+    // this.props.addUserFeed({ data: "veli" });
   }
   renderModalButton = () => {
     return (
@@ -186,18 +197,22 @@ export class SchoolsPage extends Component<IProps, IState> {
           width: 300,
           height: 400,
           cropping: true
-        }).then((image: any) => {
-          console.log(image);
-        }).catch(() => {
-          console.log("error")
-        });
+        })
+          .then(image => {
+            //fix imagecrop duplicate Image name
+            var _image = image as ImageCrop;
+            this.setState({
+              imageUploadSource: _image.path
+            });
+          })
+          .catch(() => {
+            console.log("error");
+          });
         break;
-    
+
       default:
         break;
     }
-
-    
   }
   onPress(val: Articles) {
     Actions.push(PageKey.tabSchoolDetail, {
@@ -210,28 +225,6 @@ export class SchoolsPage extends Component<IProps, IState> {
       <FlatList
         style={{ paddingTop: 15 }}
         data={this.props.database}
-        onScroll={event => {
-          // this.nativeEventY = event.nativeEvent.contentOffset.y;
-          // if (this.nativeEventY > 100 && !this.state.hideBars) {
-          //   this.setState({
-          //     hideBars: !this.state.hideBars
-          //   });
-          //   Actions.refresh({
-          //     key: PageKey.tabSchool,
-          //     hideNavBar: true,
-          //     hideTabBar: true
-          //   });
-          // } else if (this.nativeEventY < 100 && this.state.hideBars){
-          //   this.setState({
-          //     hideBars: !this.state.hideBars
-          //   });
-          //   Actions.refresh({
-          //     key: PageKey.tabSchool,
-          //     hideNavBar: false,
-          //     hideTabBar: false
-          //   });
-          // }
-        }}
         onScrollEndDrag={event => {}}
         onScrollBeginDrag={event => {}}
         ListHeaderComponent={() => this.renderAddFeedScool()}
