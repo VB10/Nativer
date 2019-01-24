@@ -60,6 +60,7 @@ export class CustomTabBar extends Component<IProps, IState> {
 
   handleButtonTab = (_pageKey: PageKey) => {
     //case button and navigate page
+
     switch (_pageKey) {
       case PageKey.tabSettings:
         Actions.tabSettings();

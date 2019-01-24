@@ -116,13 +116,13 @@ export class SchoolsPage extends Component<IProps, IState> {
     });
   }
   onChangeText(val: string) {
-    console.log(val)
+    console.log(val);
     this.setState({
       commment: val
     });
-   
   }
   renderAddFeedScool() {
+    const { commment, imageUploadSource } = this.state;
     return (
       <View style={inputStyles.contentView}>
         <Textarea
@@ -130,19 +130,13 @@ export class SchoolsPage extends Component<IProps, IState> {
           placeholder="What do you think?"
           placeholderTextColor="gray"
           multiline
-          value={this.state.commment}
-          onChangeText={val => this.setState({commment : val})}
+          value={commment}
+          onChangeText={val => this.setState({ commment: val })}
           blurOnSubmit
           style={inputStyles.placeHolderStyle}
         />
-        {this.state.imageUploadSource ? (
-          <Image
-            source={{
-              uri: this.state.imageUploadSource,
-              width: 100,
-              height: 200
-            }}
-          />
+        {imageUploadSource ? (
+          <Image source={{ uri: imageUploadSource, width: 100, height: 200 }} />
         ) : null}
         <Animated.View style={inputStyles.endContainer}>
           {this.renderModalButton()}
@@ -154,8 +148,16 @@ export class SchoolsPage extends Component<IProps, IState> {
               style={inputStyles.addIcon}
               onPress={() => this.handlePressFlyOuts()}
             />
-
-            <Button onPress={() => this.onSharePress()} rounded>
+            <Button
+              disabled={
+                // fix empty push
+                commment.length == 0 && imageUploadSource.length == 0
+                  ? true
+                  : false
+              }
+              onPress={() => this.onSharePress()}
+              rounded
+            >
               <Text>SHARE</Text>
             </Button>
           </View>
@@ -235,24 +237,17 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
   renderFlatList() {
     return (
-      // <FlatList
-      //   style={{ paddingTop: 15 }}
-      //   data={this.props.database}
-      //   onScrollEndDrag={event => {}}
-      //   onScrollBeginDrag={event => {}}
-      //   ListHeaderComponent={() => this.renderAddFeedScool()}
-      //   renderItem={({ item }) => this.renderItem(item)}
-      // />
-      <List dataArray={this.props.database} renderRow={(item) => this.renderItem(item)}
-      renderHeader={()=>this.renderAddFeedScool()}
+      <List
+        style={{paddingTop:15}}
+        dataArray={this.props.database}
+        renderRow={item => this.renderItem(item)}
+        renderHeader={() => this.renderAddFeedScool()}
       />
-     
     );
   }
   render() {
     return (
-      <View style={{ flex: 1 }}>
-      
+      <View style={_styles.container}>
         {this.props.database.length > 0 ? (
           this.renderFlatList()
         ) : (

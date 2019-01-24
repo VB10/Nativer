@@ -26,6 +26,25 @@ interface IProfile {
 }
 
 export const CommentCard = (val: IProps) => {
+  const renderImage = () => {
+    if (val.image) {
+      return (
+        <Image
+          source={{
+            uri: val.image,
+            height: 300,
+            width: DeviceHelper.width
+          }}
+          resizeMode="cover"
+        />
+      );
+    }
+  };
+  const renderText = () => {
+    if (val.comment) {
+      return <Text>{val.comment}</Text>;
+    }
+  };
   return (
     <Card>
       <CardItem>
@@ -43,16 +62,8 @@ export const CommentCard = (val: IProps) => {
         </Left>
       </CardItem>
       <CardItem cardBody style={{ flexDirection: "column" }}>
-      
-        <Image
-          source={{
-            uri: val.image,
-            height: 300,
-            width:DeviceHelper.width
-          }}
-          resizeMode="cover"
-        />
-        <Text>{val.comment}</Text>
+        {renderImage()}
+        {renderText()}
       </CardItem>
       <CardItem>
         <Left>
