@@ -13,7 +13,7 @@ import { getDatabase } from "../../../redux/actions/database";
 import { bindActionCreators } from "redux";
 import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../../util";
-import { Textarea, Button, Text, Icon } from "native-base";
+import { Textarea, Button, Text, Icon, List } from "native-base";
 import { _styles, _fabs, getTransformStyle, inputStyles } from "./styles";
 import { addUserFeed, postImage } from "../../../redux/actions/newsfeed";
 import { IFab, fabName } from "./baseSchool";
@@ -28,6 +28,7 @@ interface IState {
   yPosition: number;
   hideBars: boolean;
   imageUploadSource: string;
+  commment: string;
 }
 
 interface IProps {
@@ -39,17 +40,19 @@ interface IProps {
 
 export class SchoolsPage extends Component<IProps, IState> {
   nativeEventY: Number;
+  _txtComment: string;
   constructor(props: IProps) {
     super(props);
     this.nativeEventY = 0;
-
+    this._txtComment = "";
     this.state = {
       fabs: _fabs,
       animate: new Animated.Value(0),
       open: false,
       yPosition: 0,
       hideBars: false,
-      imageUploadSource: ""
+      imageUploadSource: "",
+      commment: ""
     };
   }
 
@@ -112,19 +115,26 @@ export class SchoolsPage extends Component<IProps, IState> {
       open: !this.state.open
     });
   }
+  onChangeText(val: string) {
+    console.log(val)
+    this.setState({
+      commment: val
+    });
+   
+  }
   renderAddFeedScool() {
     return (
       <View style={inputStyles.contentView}>
-        <TextInput multiline />
         <Textarea
           rowSpan={3}
           placeholder="What do you think?"
           placeholderTextColor="gray"
           multiline
+          value={this.state.commment}
+          onChangeText={val => this.setState({commment : val})}
           blurOnSubmit
           style={inputStyles.placeHolderStyle}
         />
-
         {this.state.imageUploadSource ? (
           <Image
             source={{
@@ -155,8 +165,11 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
 
   onSharePress() {
-    postImage({ data: this.state.imageUploadSource });
-    // this.props.addUserFeed({ data: "veli" });
+    // postImage({ data: this.state.imageUploadSource });
+    this.props.addUserFeed({
+      data: this.state.commment,
+      image: this.state.imageUploadSource
+    });
   }
   renderModalButton = () => {
     return (
@@ -222,19 +235,24 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
   renderFlatList() {
     return (
-      <FlatList
-        style={{ paddingTop: 15 }}
-        data={this.props.database}
-        onScrollEndDrag={event => {}}
-        onScrollBeginDrag={event => {}}
-        ListHeaderComponent={() => this.renderAddFeedScool()}
-        renderItem={({ item }) => this.renderItem(item)}
+      // <FlatList
+      //   style={{ paddingTop: 15 }}
+      //   data={this.props.database}
+      //   onScrollEndDrag={event => {}}
+      //   onScrollBeginDrag={event => {}}
+      //   ListHeaderComponent={() => this.renderAddFeedScool()}
+      //   renderItem={({ item }) => this.renderItem(item)}
+      // />
+      <List dataArray={this.props.database} renderRow={(item) => this.renderItem(item)}
+      renderHeader={()=>this.renderAddFeedScool()}
       />
+     
     );
   }
   render() {
     return (
       <View style={{ flex: 1 }}>
+      
         {this.props.database.length > 0 ? (
           this.renderFlatList()
         ) : (
