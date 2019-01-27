@@ -60,8 +60,7 @@ buck-out/
 Pods/
 
 #infoplist
-ios/Nativer/GoogleService-Info.plist
-
+ios/GoogleService-Info.plist
 #android
 android/app/google-services.json
 android/app/bin/google-services.json

@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -35,7 +36,7 @@
 		35C5C6FF21AF47460036B319 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C5C6FB21AF47460036B319 /* FBSDKLoginKit.framework */; };
 		35C5C70021AF47460036B319 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C5C6FC21AF47460036B319 /* FBSDKShareKit.framework */; };
 		35C5C70221AF47460036B319 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C5C6FE21AF47460036B319 /* Bolts.framework */; };
-		35D16B5F21FE65CB00AAA558 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35D16B3221FE65CA00AAA558 /* GoogleService-Info.plist */; };
+		35D8DF0C21FE71D1007C7F1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35D8DF0B21FE71D1007C7F1D /* GoogleService-Info.plist */; };
 		35EB2BA621B2F95300FEE812 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35EB2B9C21B2F92F00FEE812 /* Lottie.framework */; };
 		35EB2BA721B2F95300FEE812 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35EB2B9C21B2F92F00FEE812 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37E698C546E44801A7156C37 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F96740A7F3245C5B35DCBDA /* libRNFirebase.a */; };
@@ -444,7 +445,7 @@
 		35C5C6FC21AF47460036B319 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../../../Documents/FacebookSDKs-iOS-4.38.1 2/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		35C5C6FD21AF47460036B319 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../Documents/FacebookSDKs-iOS-4.38.1 2/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		35C5C6FE21AF47460036B319 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../Documents/FacebookSDKs-iOS-4.38.1 2/Bolts.framework"; sourceTree = "<group>"; };
-		35D16B3221FE65CA00AAA558 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Nativer/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		35D8DF0B21FE71D1007C7F1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		48BEC417AF2D4A2AB6156DEE /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		523CFD889B4B4E2A917D348B /* Montserrat_Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Montserrat_Light.ttf; path = ../assets/fonts/Montserrat_Light.ttf; sourceTree = "<group>"; };
 		56034722A938447EB453072C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -607,7 +608,7 @@
 		13B07FAE1A68108700A75B9A /* Nativer */ = {
 			isa = PBXGroup;
 			children = (
-				35D16B3221FE65CA00AAA558 /* GoogleService-Info.plist */,
+				35D8DF0B21FE71D1007C7F1D /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1336,7 +1337,7 @@
 				076C8885B2CF4C3CA4DA9F89 /* Montserrat_Light.ttf in Resources */,
 				EF983B54E16D46249EB00186 /* AntDesign.ttf in Resources */,
 				2E68CBDCB7154035A17C4044 /* FontAwesome5_Brands.ttf in Resources */,
-				35D16B5F21FE65CB00AAA558 /* GoogleService-Info.plist in Resources */,
+				35D8DF0C21FE71D1007C7F1D /* GoogleService-Info.plist in Resources */,
 				FBC9463ECE9B4EC99D77342D /* FontAwesome5_Regular.ttf in Resources */,
 				4F64F6F39F2845709F4F55D4 /* FontAwesome5_Solid.ttf in Resources */,
 			);
