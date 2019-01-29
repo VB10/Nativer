@@ -61,6 +61,6 @@ Pods/
 
 #infoplist
 ios/GoogleService-Info.plist
-
 #android
 android/app/google-services.json
+android/app/bin/google-services.json

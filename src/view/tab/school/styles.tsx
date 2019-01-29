@@ -1,4 +1,5 @@
 import { StyleSheet, Animated } from "react-native";
+import { fabName } from "./baseSchool";
 
 export const getTransformStyle = (animation: any) => {
   return {
@@ -8,19 +9,19 @@ export const getTransformStyle = (animation: any) => {
 export const _fabs = [
   {
     animation: new Animated.Value(0),
-    name: "Location",
+    name: fabName.location,
     icon: "locate",
     iconColor: "red"
   },
   {
     animation: new Animated.Value(0),
-    name: "Camera",
+    name: fabName.camera,
     icon: "camera",
     iconColor: "blue"
   },
   {
     animation: new Animated.Value(0),
-    name: "Gallery",
+    name: fabName.gallery,
     icon: "photos",
     iconColor: "green"
   }

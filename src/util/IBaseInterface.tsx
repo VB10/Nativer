@@ -13,10 +13,11 @@ interface ArticlesChild {
 }
 
 interface INewsFeed {
-  key: String;
+  key: string;
   data : NewsFeedChild
 }
 
 interface NewsFeedChild {
-  data: String;
+  data: string;
+  image: string
 }

@@ -13,45 +13,46 @@ import { getDatabase } from "../../../redux/actions/database";
 import { bindActionCreators } from "redux";
 import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../../util";
-import { Textarea, Button, StyleProvider, Text, Icon } from "native-base";
-import {
-  _styles,
-  _fabs,
-  cardStyles,
-  getTransformStyle,
-  inputStyles
-} from "./styles";
-import { addUserFeed } from "../../../redux/actions/newsfeed";
-import { IFab } from "./baseSchool";
+import { Textarea, Button, Text, Icon, List } from "native-base";
+import { _styles, _fabs, getTransformStyle, inputStyles } from "./styles";
+import { addUserFeed, postImage } from "../../../redux/actions/newsfeed";
+import { IFab, fabName } from "./baseSchool";
 import CommentCard from "./cardComment";
-import { string } from "prop-types";
 import { changeBarType } from "../../../redux/actions/bar_change";
+import ImagePicker, { ImageCrop } from "react-native-image-crop-picker";
 
-export interface IState {
+interface IState {
   fabs: IFab[];
   animate: Animated.Value;
   open: boolean;
   yPosition: number;
   hideBars: boolean;
+  imageUploadSource: string;
+  commment: string;
 }
-export interface IProps {
+
+interface IProps {
   getAllDB: () => {};
   addUserFeed: (val: NewsFeedChild) => {};
   changeBarType: (val: boolean) => {};
   database: [Articles];
 }
+
 export class SchoolsPage extends Component<IProps, IState> {
   nativeEventY: Number;
+  _txtComment: string;
   constructor(props: IProps) {
     super(props);
     this.nativeEventY = 0;
-
+    this._txtComment = "";
     this.state = {
       fabs: _fabs,
       animate: new Animated.Value(0),
       open: false,
       yPosition: 0,
-      hideBars: false
+      hideBars: false,
+      imageUploadSource: "",
+      commment: ""
     };
   }
 
@@ -92,19 +93,21 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
 
   handlePressFlyOuts() {
-    //TODO add animation bar hidden schools
-    this.props.changeBarType(true);
+    // TODO add animation bar hidden schools
+    // this.props.changeBarType(true);
     const toValue = this.state.open ? 0 : 1;
     const flyOuts = this.state.fabs.map((value: IFab, index: number) => {
       return Animated.spring(value.animation, {
         toValue: index * -85 * toValue,
-        friction: 4
+        friction: 4,
+        useNativeDriver: true
       });
     });
     Animated.parallel([
       Animated.timing(this.state.animate, {
         toValue,
-        duration: 300
+        duration: 300,
+        useNativeDriver: true
       }),
       Animated.stagger(30, flyOuts)
     ]).start();
@@ -112,20 +115,30 @@ export class SchoolsPage extends Component<IProps, IState> {
       open: !this.state.open
     });
   }
+  onChangeText(val: string) {
+    console.log(val);
+    this.setState({
+      commment: val
+    });
+  }
   renderAddFeedScool() {
+    const { commment, imageUploadSource } = this.state;
     return (
       <View style={inputStyles.contentView}>
-        <TextInput multiline />
         <Textarea
           rowSpan={3}
           placeholder="What do you think?"
           placeholderTextColor="gray"
           multiline
+          value={commment}
+          onChangeText={val => this.setState({ commment: val })}
           blurOnSubmit
           style={inputStyles.placeHolderStyle}
         />
-
-        <View style={inputStyles.endContainer}>
+        {imageUploadSource ? (
+          <Image source={{ uri: imageUploadSource, width: 100, height: 200 }} />
+        ) : null}
+        <Animated.View style={inputStyles.endContainer}>
           {this.renderModalButton()}
 
           <View style={inputStyles.endRight}>
@@ -135,28 +148,35 @@ export class SchoolsPage extends Component<IProps, IState> {
               style={inputStyles.addIcon}
               onPress={() => this.handlePressFlyOuts()}
             />
-
-            <Button onPress={() => this.onSharePress()} rounded>
+            <Button
+              disabled={
+                // fix empty push
+                commment.length == 0 && imageUploadSource.length == 0
+                  ? true
+                  : false
+              }
+              onPress={() => this.onSharePress()}
+              rounded
+            >
               <Text>SHARE</Text>
             </Button>
           </View>
-        </View>
+        </Animated.View>
       </View>
     );
   }
 
   onSharePress() {
-    this.props.addUserFeed({ data: "veli" });
+    // postImage({ data: this.state.imageUploadSource });
+    this.props.addUserFeed({
+      data: this.state.commment,
+      image: this.state.imageUploadSource
+    });
   }
   renderModalButton = () => {
     return (
-      <View
-        style={[
-          {
-            flexDirection: "row",
-            opacity: this.state.open ? 1 : 0
-          }
-        ]}
+      <Animated.View
+        style={[{ flexDirection: "row", opacity: this.state.open ? 1 : 0 }]}
       >
         {this.state.fabs.map((fab: IFab, index: number) => {
           return (
@@ -168,7 +188,9 @@ export class SchoolsPage extends Component<IProps, IState> {
                 _styles.flyout,
                 getTransformStyle(fab.animation)
               ]}
-              onPress={() => {}}
+              onPress={() => {
+                this.fabOnPress(fab.name);
+              }}
             >
               <Icon
                 name={fab.icon}
@@ -179,9 +201,34 @@ export class SchoolsPage extends Component<IProps, IState> {
             </TouchableOpacity>
           );
         })}
-      </View>
+      </Animated.View>
     );
   };
+  fabOnPress(val: fabName) {
+    switch (val) {
+      case fabName.camera:
+        //TODO ADD TAKE PHOTO
+        ImagePicker.openPicker({
+          width: 300,
+          height: 400,
+          cropping: true
+        })
+          .then(image => {
+            //fix imagecrop duplicate Image name
+            var _image = image as ImageCrop;
+            this.setState({
+              imageUploadSource: _image.path
+            });
+          })
+          .catch(() => {
+            console.log("error");
+          });
+        break;
+
+      default:
+        break;
+    }
+  }
   onPress(val: Articles) {
     Actions.push(PageKey.tabSchoolDetail, {
       article: val,
@@ -190,41 +237,17 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
   renderFlatList() {
     return (
-      <FlatList
-        style={{ paddingTop: 15 }}
-        data={this.props.database}
-        onScroll={event => {
-          // this.nativeEventY = event.nativeEvent.contentOffset.y;
-          // if (this.nativeEventY > 100 && !this.state.hideBars) {
-          //   this.setState({
-          //     hideBars: !this.state.hideBars
-          //   });
-          //   Actions.refresh({
-          //     key: PageKey.tabSchool,
-          //     hideNavBar: true,
-          //     hideTabBar: true
-          //   });
-          // } else if (this.nativeEventY < 100 && this.state.hideBars){
-          //   this.setState({
-          //     hideBars: !this.state.hideBars
-          //   });
-          //   Actions.refresh({
-          //     key: PageKey.tabSchool,
-          //     hideNavBar: false,
-          //     hideTabBar: false
-          //   });
-          // }
-        }}
-        onScrollEndDrag={event => {}}
-        onScrollBeginDrag={event => {}}
-        ListHeaderComponent={() => this.renderAddFeedScool()}
-        renderItem={({ item }) => this.renderItem(item)}
+      <List
+        style={{paddingTop:15}}
+        dataArray={this.props.database}
+        renderRow={item => this.renderItem(item)}
+        renderHeader={() => this.renderAddFeedScool()}
       />
     );
   }
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={_styles.container}>
         {this.props.database.length > 0 ? (
           this.renderFlatList()
         ) : (

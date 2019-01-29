@@ -4,6 +4,11 @@ import android.app.Application;
 
 import com.facebook.CallbackManager;
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.airbnb.android.react.lottie.LottiePackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 
@@ -34,6 +39,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new PickerPackage(),
+            new RNFirebasePackage(),
+            new FBSDKPackage(),
+            new LottiePackage(),
+            new PickerPackage(),
             new RNFirebasePackage(),
             new LottiePackage(),
               new RNFirebaseDatabasePackage(),

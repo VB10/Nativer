@@ -31,6 +31,16 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>add photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>library usage</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>library usaage</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>microphone usaage</string>
+	<key>NSCameraUsageDescription</key>
+	<string>camera usage</string>
 	<key>FacebookAppID</key>
 	<string>452485741948466</string>
 	<key>FacebookDisplayName</key>
@@ -75,7 +85,10 @@
 		<string>rubicon-icon-font.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
-		<string>Montserrat-Light.ttf</string>
+		<string>AntDesign.ttf</string>
+		<string>FontAwesome5_Brands.ttf</string>
+		<string>FontAwesome5_Regular.ttf</string>
+		<string>FontAwesome5_Solid.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
