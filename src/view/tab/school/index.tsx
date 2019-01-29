@@ -15,7 +15,7 @@ import { Actions } from "react-native-router-flux";
 import { PageKey } from "../../../util";
 import { Textarea, Button, Text, Icon, List } from "native-base";
 import { _styles, _fabs, getTransformStyle, inputStyles } from "./styles";
-import { addUserFeed, postImage } from "../../../redux/actions/newsfeed";
+import { addUserFeed } from "../../../redux/actions/newsfeed";
 import { IFab, fabName } from "./baseSchool";
 import CommentCard from "./cardComment";
 import { changeBarType } from "../../../redux/actions/bar_change";
@@ -29,6 +29,7 @@ interface IState {
   hideBars: boolean;
   imageUploadSource: string;
   commment: string;
+  textInputs: string[];
 }
 
 interface IProps {
@@ -52,7 +53,8 @@ export class SchoolsPage extends Component<IProps, IState> {
       yPosition: 0,
       hideBars: false,
       imageUploadSource: "",
-      commment: ""
+      commment: "",
+      textInputs: []
     };
   }
 
@@ -115,25 +117,27 @@ export class SchoolsPage extends Component<IProps, IState> {
       open: !this.state.open
     });
   }
-  onChangeText(val: string) {
-    console.log(val);
+  onChangeText = (val: string) => {
     this.setState({
       commment: val
     });
-  }
-  renderAddFeedScool() {
+  };
+  renderAddFeedScool = () => {
     const { commment, imageUploadSource } = this.state;
     return (
       <View style={inputStyles.contentView}>
-        <Textarea
-          rowSpan={3}
-          placeholder="What do you think?"
-          placeholderTextColor="gray"
-          multiline
-          value={commment}
-          onChangeText={val => this.setState({ commment: val })}
-          blurOnSubmit
-          style={inputStyles.placeHolderStyle}
+        <TextInput
+          style={{ height: 40, flex: 1 }}
+          placeholder="Type text for search"
+          clearButtonMode="while-editing"
+          value={this.state.commment}
+          onChangeText={text => {
+            let { commment } = this.state;
+            var x = text;
+            this.setState({
+              commment: x
+            });
+          }}
         />
         {imageUploadSource ? (
           <Image source={{ uri: imageUploadSource, width: 100, height: 200 }} />
@@ -164,7 +168,7 @@ export class SchoolsPage extends Component<IProps, IState> {
         </Animated.View>
       </View>
     );
-  }
+  };
 
   onSharePress() {
     // postImage({ data: this.state.imageUploadSource });
@@ -237,11 +241,10 @@ export class SchoolsPage extends Component<IProps, IState> {
   }
   renderFlatList() {
     return (
-      <List
-        style={{paddingTop:15}}
-        dataArray={this.props.database}
-        renderRow={item => this.renderItem(item)}
-        renderHeader={() => this.renderAddFeedScool()}
+      <FlatList
+        data={this.props.database}
+        ListHeaderComponent={() => this.renderAddFeedScool()}
+        renderItem={({ item }) => this.renderItem(item)}
       />
     );
   }
