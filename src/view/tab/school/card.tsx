@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import { Text, View, ImageBackground, TouchableOpacity } from "react-native";
 import { Icon } from "native-base";
 import { cardStyles } from "./styles";
+
+/**
+ *
+ *
+ * @interface IProps
+ */
 interface IProps {
   city: string;
   schoolName: string;
@@ -10,6 +16,10 @@ interface IProps {
   onPress :()=>void
 }
 
+/**
+ * 
+ * @param val 
+ */
 export const  SchoolCard = (val : IProps) => {
     return (
         <TouchableOpacity

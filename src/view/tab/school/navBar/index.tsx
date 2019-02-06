@@ -13,26 +13,31 @@ import { getDatabase } from "../../../../redux/actions/database";
 import { addUserFeed } from "../../../../redux/actions/newsfeed";
 import { connect } from "react-redux";
 import { changeBarType } from "../../../../redux/actions/bar_change";
-//TODO FIX IT reducersand props...
-export class SchoolNavBar extends Component {
-  componentWillMount() {
-    console.log(this.props.barVisibility, "AAAA");
-  }
+//TODO FIX IT reducersand props.
 
-  render() {
-    return <SafeAreaView style={styles.safeView}>
-        {/* {this.props.barVisibility ? <Text>oldu</Text> : <Text>OLMADI</Text>} */}
-        <View style={[styles.contentView]}>
-          <Text style={styles.text}>Schools</Text>
-          <TouchableOpacity style={styles.touchableOpacity}>
-            <Icon name="sliders" type="Feather" style={styles.icon} />
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>;
-  }
+interface IState {}
+interface IProps {
+  title: string;
 }
+export class SchoolNavBar extends Component<IProps, IState> {
+         componentWillMount() {
+           // console.log(this.props.barVisibility, "AAAA");
+           console.log(this.props, "Set1");
+         }
+
+         render() {
+           return <SafeAreaView style={styles.safeView}>
+               {/* {this.props.barVisibility ? <Text>oldu</Text> : <Text>OLMADI</Text>} */}
+               <View style={[styles.contentView]}>
+                 <Text style={styles.text}>{this.props.title}</Text>
+                 <TouchableOpacity style={styles.touchableOpacity}>
+                   <Icon name="sliders" type="Feather" style={styles.icon} />
+                 </TouchableOpacity>
+               </View>
+             </SafeAreaView>;
+         }
+       }
 const mapStateToProps = (state: any) => {
-  console.log(state,"AAAAZZ")
   return { barVisibility: state.barReducer };
 };
 

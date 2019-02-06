@@ -11,9 +11,12 @@ import {
   Body,
   Right,
   Switch,
-  Footer
+  Footer,
+  Header
 } from "native-base";
 import { bindActionCreators } from "redux";
+import { styles } from "./styles";
+import { SchoolNavBar } from "../school/navBar";
 
 interface IState {}
 interface IProps {}
@@ -27,19 +30,19 @@ class SettingsPage extends Component<IProps, IState> {
 
   render() {
     return (
-      <View style={{ flex: 1, marginTop: 10 }}>
-        <View style={{ flex: 0.3 }}>
+      <View style={styles.view}>
+        <View style={styles.profile}>
           <ProfileCard />
         </View>
-        <Content style={{ flex: 1 }}>
+        <Content>
           <ListItem icon>
             <Left>
-              <Button style={{ backgroundColor: "#FF9501" }}>
-                <Icon active name="plane" />
+              <Button style={{ backgroundColor: "#007AFF" }}>
+                <Icon active name="moon" />
               </Button>
             </Left>
             <Body>
-              <Text>Airplane Mode</Text>
+              <Text>Dark Mode</Text>
             </Body>
             <Right>
               <Switch value={false} />

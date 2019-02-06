@@ -8,7 +8,6 @@ import SchoolNavBar from "./tab/school/navBar";
 import settings from "./tab/settings";
 import SchoolDetailPage from "./tab/school/detail";
 import { PageKey } from "../util";
-import CenterAction from "./tab/center";
 import TabMain from "./home";
 
 const AppRouter = (
@@ -28,6 +27,7 @@ const AppRouter = (
         <Scene
           key={PageKey.tabSettings}
           component={settings}
+          navBar={SchoolNavBar}
           isTransitioning
           title="Settings"
           rightTitle="cpu"

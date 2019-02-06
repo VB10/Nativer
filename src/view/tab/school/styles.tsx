@@ -36,7 +36,8 @@ export const inputStyles = StyleSheet.create({
     marginLeft: 5,
     shadowOffset: { width: 5, height: 5 },
     shadowColor: "black",
-    shadowOpacity: 0.3
+    shadowOpacity: 0.3,
+    marginTop:10
   },
   placeHolderStyle: {
     borderBottomWidth: 1,
