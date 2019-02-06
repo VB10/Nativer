@@ -26,8 +26,7 @@ export function addUserFeed(value: NewsFeedChild) {
       .then(data => {
         //TODO fıx result..
 
-        console.log("geldiii", data);
-        console.log("geldiii", data.key);
+  
 
         if (value.image) {
           postImage({ data: data.key, image: value.image });

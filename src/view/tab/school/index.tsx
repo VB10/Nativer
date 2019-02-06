@@ -19,7 +19,7 @@ import { addUserFeed } from "../../../redux/actions/newsfeed";
 import { IFab, fabName } from "./baseSchool";
 import CommentCard from "./cardComment";
 import { changeBarType } from "../../../redux/actions/bar_change";
-import ImagePicker, { ImageCrop } from "react-native-image-crop-picker";
+import ImagePicker, { Imagex } from "react-native-image-crop-picker";
 
 interface IState {
   fabs: IFab[];
@@ -219,7 +219,7 @@ export class SchoolsPage extends Component<IProps, IState> {
         })
           .then(image => {
             //fix imagecrop duplicate Image name
-            var _image = image as ImageCrop;
+            var _image = image as Imagex;
             this.setState({
               imageUploadSource: _image.path
             });

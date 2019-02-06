@@ -11,10 +11,12 @@ import {
   Body,
   Right,
   Switch,
-  Footer
+  Footer,
+  Header
 } from "native-base";
 import { bindActionCreators } from "redux";
 import { styles } from "./styles";
+import { SchoolNavBar } from "../school/navBar";
 
 interface IState {}
 interface IProps {}
@@ -27,11 +29,12 @@ class SettingsPage extends Component<IProps, IState> {
   componentDidMount() {}
 
   render() {
-    return <View style={styles.view}>
+    return (
+      <View style={styles.view}>
         <View style={styles.profile}>
           <ProfileCard />
         </View>
-        <Content >
+        <Content>
           <ListItem icon>
             <Left>
               <Button style={{ backgroundColor: "#007AFF" }}>
@@ -81,7 +84,8 @@ class SettingsPage extends Component<IProps, IState> {
             <Text style={{ color: "white", fontSize: 20 }}>Log out</Text>
           </Button>
         </View>
-      </View>;
+      </View>
+    );
   }
 }
 //fix any
