@@ -42,7 +42,6 @@ public class MainApplication extends Application implements ReactApplication {
             new PickerPackage(),
             new RNFirebasePackage(),
             new FBSDKPackage(),
-            new LottiePackage(),
             new PickerPackage(),
             new RNFirebasePackage(),
             new LottiePackage(),

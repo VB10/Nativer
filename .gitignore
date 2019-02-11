@@ -58,6 +58,7 @@ buck-out/
 
 # ios
 Pods/
+Framework/
 
 #infoplist
 ios/GoogleService-Info.plist

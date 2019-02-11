@@ -31,7 +31,7 @@ export class SchoolNavBar extends Component<IProps, IState> {
                <View style={[styles.contentView]}>
                  <Text style={styles.text}>{this.props.title}</Text>
                  <TouchableOpacity style={styles.touchableOpacity}>
-                   <Icon name="sliders" type="Feather" style={styles.icon} />
+                   <Icon name="home" type="Feather" style={styles.icon} />
                  </TouchableOpacity>
                </View>
              </SafeAreaView>;
