@@ -9,10 +9,12 @@ Nativer have a cloud & mobile worlds ,native code , React JS , React Native ... 
   - Use Design Concepts
   - Mobile power
 
+
+![HWA Nativer](https://github.com/VB10/Nativer/blob/master/demos/Screen%20Shot%202019-02-11%20at%2023.23.56.png?raw=true)
 # New Features!
 
   - Native Code Sharing(TODO)
-  - Easy Redux (TODO)
+  - Easy Redux (x)
   - .....
 
 You can also:
