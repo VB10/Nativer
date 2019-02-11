@@ -2,20 +2,20 @@ import { StyleSheet, PixelRatio } from "react-native";
 
 export const styles = StyleSheet.create({
   safeView: {
-    height: 25 * PixelRatio.get(),
+    height: 50 * PixelRatio.get(),
     padding: 5,
     justifyContent: "center",
     backgroundColor: "#fed000"
   },
   contentView: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   text: {
     color: "rgba(48,56,65,0.7)",
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 15 * PixelRatio.get(),
     position: "absolute",
     left: 10
   },
